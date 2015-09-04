@@ -5,12 +5,25 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <% if user_signed_in? %>
-      <span>Здравствуйте, <%= current_user.email %></span>
-      <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-  <% else %>
-      <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
-  <% end %>
+
+  <table>
+    <tr>
+      <td>Search</td>
+
+      <% if user_signed_in? %>
+          <td><%= current_user.email %></td>
+          <td><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></td>
+      <% else %>
+      <td><%= link_to 'Войти', new_user_session_path %></td>
+      <td><%= link_to 'Зарегистрироваться', new_user_registration_path %></td>
+      <% end %>
+
+      <td>Settings</td>
+    </tr>
+  </table>
+
+
+
 
 </head>
 <body>
