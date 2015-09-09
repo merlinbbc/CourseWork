@@ -66,12 +66,9 @@ GEM
     jwt (1.5.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-<<<<<<< HEAD
     markitup-rails (1.1.3)
       rails (>= 3.1)
-=======
     method_source (0.8.2)
->>>>>>> 500e676dcc8164427ebbb940edd0c6c2897870fe
     mime-types (2.6.1)
     minitest (5.8.0)
     multi_json (1.11.2)

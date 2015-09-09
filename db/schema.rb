@@ -79,11 +79,6 @@ ActiveRecord::Schema.define(version: 20150909161802) do
     t.text     "text"
     t.integer  "rating"
     t.text     "answers"
-<<<<<<< HEAD
-=======
-    t.string   "section"
-    t.integer  "author_id"
->>>>>>> 500e676dcc8164427ebbb940edd0c6c2897870fe
     t.datetime "created_at"
     t.datetime "updated_at"
   end
