@@ -1,24 +1,29 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  #  :lockable, :timeoutable and :omniauthable
+  has_many :attempts
+  has_many :tasks, through: :attempts
+
+  has_many :comments
+  has_many :tasks, foreign_key: "author_id"
+
+  has_and_belongs_to_many :achivements
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          :validatable, :omniauthable, :confirmable,
          :omniauth_providers => [:facebook, :vkontakte, :github, :twitter]
-  #attr_accessible :email, :password, :password_confirmation, :remember_me
-  #attr_accessible :nickname, :provider, :url, :username
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
 
-
-
   def self.from_omniauth(auth)
-    where(provider: auth[:provider], id: auth[:id]).first_or_create do |user|
-      user.nickname = auth[:info][:nickname]
-      user.email = auth[:info][:email]
+    where(email: auth['info']['email']).first_or_create do |user|
+      passwd = Devise.friendly_token.first(8)
+      user.password = passwd
+      user.password_confirmation = passwd
+      user.email = auth['info']['email']
+
     end
   end
 
