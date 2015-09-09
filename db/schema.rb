@@ -14,9 +14,10 @@
 ActiveRecord::Schema.define(version: 20150906190122) do
 
   create_table "tasks", force: true do |t|
-    t.string   "title",      default: "", null: false
+    t.string   "title"
     t.text     "text"
-    t.integer  "rating",                  null: false
+    t.integer  "rating"
+    t.text     "answers"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,18 +1,15 @@
 <h1>Listing Task</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Rating</th>
-  </tr>
+
 
   <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.text %></td>
-        <td><%= task.rating %></td>
-        <td><%= link_to 'Show', task_path(task) %></td>
-      </tr>
+    <%= task.title %> </br>
+    <%=markdown(task.text)%>
+    <%= task.rating %> </br>
+    <%= link_to 'Show', task_path(task) %>
+    <%= link_to 'Edit', edit_task_path(task) %>
+    <%= link_to 'Destroy', task_path(task),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %></br>
+
   <% end %>
-</table>
