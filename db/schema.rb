@@ -11,13 +11,79 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906190122) do
+ActiveRecord::Schema.define(version: 20150909161802) do
+
+  create_table "achievments_users", id: false, force: true do |t|
+    t.integer  "user_id"
+    t.integer  "achievment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "achievments_users", ["achievment_id"], name: "index_achievments_users_on_achievment_id", using: :btree
+  add_index "achievments_users", ["user_id"], name: "index_achievments_users_on_user_id", using: :btree
+
+  create_table "achivements", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attempts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.integer  "attempts_count", default: 0
+    t.boolean  "status",         default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attempts", ["task_id"], name: "index_attempts_on_task_id", using: :btree
+  add_index "attempts", ["user_id"], name: "index_attempts_on_user_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.string   "this_comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "sections", force: true do |t|
+    t.string  "name"
+    t.integer "task_id"
+  end
+
+  add_index "sections", ["task_id"], name: "index_sections_on_task_id", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags_tasks", id: false, force: true do |t|
+    t.integer  "task_id"
+    t.integer  "tags_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tags_tasks", ["tags_id"], name: "index_tags_tasks_on_tags_id", using: :btree
+  add_index "tags_tasks", ["task_id"], name: "index_tags_tasks_on_task_id", using: :btree
 
   create_table "tasks", force: true do |t|
     t.string   "title"
     t.text     "text"
     t.integer  "rating"
     t.text     "answers"
+<<<<<<< HEAD
+=======
+    t.string   "section"
+    t.integer  "author_id"
+>>>>>>> 500e676dcc8164427ebbb940edd0c6c2897870fe
     t.datetime "created_at"
     t.datetime "updated_at"
   end

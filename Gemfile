@@ -19,8 +19,12 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'faker'
+<<<<<<< HEAD
 gem "redcarpet"
 gem 'markitup-rails'
+=======
+gem 'pry'
+>>>>>>> 500e676dcc8164427ebbb940edd0c6c2897870fe
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

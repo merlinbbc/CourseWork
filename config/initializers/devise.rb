@@ -14,7 +14,7 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
-  config.omniauth :facebook, "750087178452489", "c6dc8ccb0343fa6ea01e46934a4a5fab"
+  config.omniauth :facebook, "750087178452489", "c6dc8ccb0343fa6ea01e46934a4a5fab", scope: "email", info_fields: 'email'
   config.omniauth :twitter, "xP0eNkygXbECbYN1JXWXbfIS5", "ckSZaFLfspvoKbjjCGNtYCgY5xtq1onbbl6kJyywxrQqLTkemj"
   config.omniauth :vkontakte, "5040265", "5clS5xrloKywdoaLTH9g"
 
