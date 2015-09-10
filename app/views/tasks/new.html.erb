@@ -29,8 +29,10 @@
       <%= f.number_field :rating , 'max'=>10, 'min'=>1 %>
     </p>
 
-    <%=f.text_area :answers, as: :array, autocomplete: "off"%>
 
+
+    <textarea  autocomplete="off" id="task_answers" name="task[answers][]"></textarea>
+    <textarea  autocomplete="off" id="task_answers" name="task[answers][]"></textarea>
     <p>
       <%= f.submit %>
     </p>
