@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :tasks, through: :attempts
 
   has_many :comments
-  has_many :tasks, foreign_key: "author_id"
+  has_many :author_tasks, foreign_key: "author_id", class_name: 'Taks'
 
   has_and_belongs_to_many :achivements
 

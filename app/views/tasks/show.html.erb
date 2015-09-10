@@ -13,9 +13,19 @@
   <%= @task.rating %>
 </p>
 <p>
+
   <strong>Section:</strong>
   <%= @task.section.name %>
 </p>
+<p>
+ <strong>Answers:</strong>
+  <% @task.answers.each do |a| %>
+    <%= a %></br>
+  <% end %>
+
+</p>
+
+er
 <%= link_to 'Back', tasks_path %>
 <%= link_to 'Edit', edit_task_path(@task) %>
 <%= link_to 'Destroy', task_path(@task),

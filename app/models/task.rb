@@ -11,5 +11,5 @@ class Task < ActiveRecord::Base
   belongs_to :section
 
   has_and_belongs_to_many :Tags, index: true
-
+  serialize :answers, JSON
 end
