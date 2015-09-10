@@ -9,10 +9,13 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new(answers: Array.new(5,""))
+    @task.section
   end
 
   def create
+    binding.pry
     @task = Task.new(task_params)
+    @task.author_id = current_user.id
     if @task.save
       flash[:success] = "Task was created!"
       redirect_to @task
@@ -44,6 +47,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @task.section
   end
 
   private
@@ -52,7 +56,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title,:text, :rating);
+    params.require(:task).permit(:title,:text, :rating, :name, :section_id);
   end
 
 end

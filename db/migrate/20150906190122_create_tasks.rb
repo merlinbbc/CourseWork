@@ -7,6 +7,8 @@ class CreateTasks < ActiveRecord::Migration
       t.text :answers, array: true
       t.string :section
       t.belongs_to :author
+      t.belongs_to :section
+
       t.timestamps
     end
   end

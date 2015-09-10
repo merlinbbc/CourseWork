@@ -12,6 +12,10 @@
   <strong>Rating:</strong>
   <%= @task.rating %>
 </p>
+<p>
+  <strong>Section:</strong>
+  <%= @task.section.name %>
+</p>
 <%= link_to 'Back', tasks_path %>
 <%= link_to 'Edit', edit_task_path(@task) %>
 <%= link_to 'Destroy', task_path(@task),

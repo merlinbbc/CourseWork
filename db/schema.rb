@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150909161802) do
   add_index "sections", ["task_id"], name: "index_sections_on_task_id", using: :btree
 
   create_table "tags", force: true do |t|
+    t.text     "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,6 +80,9 @@ ActiveRecord::Schema.define(version: 20150909161802) do
     t.text     "text"
     t.integer  "rating"
     t.text     "answers"
+    t.string   "section"
+    t.integer  "author_id"
+    t.integer  "section_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
