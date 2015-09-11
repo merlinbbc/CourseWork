@@ -13,7 +13,6 @@ class TasksController < ApplicationController
   end
 
   def create
-
     @task = Task.new(task_params)
     @task.author_id = current_user.id
     #binding.pry
@@ -58,7 +57,11 @@ class TasksController < ApplicationController
 
   def task_params
 
+<<<<<<< HEAD
     params.require(:task).permit(:title,:text, :rating, :section_id ,answers: [] );
+=======
+    params.require(:task).permit(:title,:text, :rating, :section_id, answers: []);
+>>>>>>> origin/master
 
   end
 
