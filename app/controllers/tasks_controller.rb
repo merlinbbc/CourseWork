@@ -56,13 +56,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-
-<<<<<<< HEAD
-    params.require(:task).permit(:title,:text, :rating, :section_id ,answers: [] );
-=======
     params.require(:task).permit(:title,:text, :rating, :section_id, answers: []);
->>>>>>> origin/master
-
   end
 
 end
