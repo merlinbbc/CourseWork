@@ -13,10 +13,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    binding.pry
+
     @task = Task.new(task_params)
     @task.author_id = current_user.id
-
+    #binding.pry
     if @task.save
       flash[:success] = "Task was created!"
       redirect_to @task
@@ -58,7 +58,7 @@ class TasksController < ApplicationController
 
   def task_params
 
-    params.require(:task).permit(:title,:text, :rating, answers: []);
+    params.require(:task).permit(:title,:text, :rating, :section_id ,answers: [] );
 
   end
 

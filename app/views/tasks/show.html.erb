@@ -1,33 +1,36 @@
-<p>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</p>
+<table width="40%" class=margin-left>
+  <tr >
+    <td width="10%"><h4><%=@task.title%><br><br>
+      Rating: <%= @task.rating %></h4></td>
+  </tr>
 
-<p>
-  <strong>Text:</strong>
-  <%=markdown(@task.text) %>
-</p>
+  <tr>
+    <td><h4>Section: <%= @task.section.name %></h4></td>
+  </tr>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @task.rating %>
-</p>
-<p>
+  <tr>
+    <td width="40%"><%=markdown(@task.text)%></td>
+  </tr>
 
-  <strong>Section:</strong>
-  <%= @task.section.name %>
-</p>
-<p>
- <strong>Answers:</strong>
-  <% @task.answers.each do |a| %>
-    <%= a %></br>
+  <% if current_user.id == @task.author_id %>
+      <tr>
+          <td><h4>Answers:</h4></td>
+      </tr>
+
+        <% @task.answers.each do |a| %>
+          <tr><td><%= a %></br></td></tr>
+        <% end %>
+
+      <tr>
+        <td></br> <%= link_to 'Edit', edit_task_path(@task) %>
+             <%= link_to 'Destroy', task_path(@task),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %>
   <% end %>
+            <%= link_to 'Back', tasks_path %></td>
+        </tr>
 
-</p>
 
-er
-<%= link_to 'Back', tasks_path %>
-<%= link_to 'Edit', edit_task_path(@task) %>
-<%= link_to 'Destroy', task_path(@task),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
+</table>
+
+

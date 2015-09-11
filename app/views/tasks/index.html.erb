@@ -1,17 +1,26 @@
+<div class="center">
 <h1>Listing Task</h1>
-
-
+</div>
 
   <% @tasks.each do |task| %>
-    <%= task.title %> </br>
-    <%=markdown(task.text)%>
-    <%= task.rating %> </br>
-    <% if current_user.id == task.author_id %>>
-    <%= link_to 'Show', task_path(task) %>
-    <%= link_to 'Edit', edit_task_path(task) %>
-    <%= link_to 'Destroy', task_path(task),
-                        method: :delete,
-                        data: { confirm: 'Are you sure?' } %></br>
-    <% end %>
-
+    <table width="40%" class=margin-left>
+      <tr >
+        <td width="10%"><h4><%= link_to task.title, task_path(task) %><br><br>
+        Rating: <%= task.rating %></h4></td>
+      </tr>
+      <tr><br></tr>
+      <tr>
+        <td width="40%"><%=markdown(task.text)%></td>
+      </tr>
+      <tr></tr>
+      <tr>
+        <td><% if current_user.id == task.author_id %>
+              <%= link_to 'Edit', edit_task_path(task) %>
+              <%= link_to 'Destroy', task_path(task),
+                          method: :delete,
+                          data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
   <% end %>
