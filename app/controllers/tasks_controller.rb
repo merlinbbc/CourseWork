@@ -8,19 +8,20 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new(answers: Array.new(5,""))
+    @task = Task.new(answers: Array.new(1,""))
     @task.section
   end
 
   def create
     @task = Task.new(task_params)
     @task.author_id = current_user.id
+    if @task.section_id == nil or !@task.save or @task.answers == [""]
+      flash[:danger] = "Task wasn't created!"
+      render 'new'
     #binding.pry
-    if @task.save
+    else
       flash[:success] = "Task was created!"
       redirect_to @task
-    else
-      render 'new'
     end
   end
 
@@ -57,6 +58,10 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title,:text, :rating, :section_id, answers: []);
+  end
+
+  def render_new
+    render 'new'
   end
 
 end

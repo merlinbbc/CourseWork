@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>CourseWork</title>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -20,17 +21,23 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+          <ul class="nav navbar-nav pull-left">
+            <li><a href="#">Home page</a></li>
+          </ul>
           <ul class="nav navbar-nav pull-right" >
             <% if user_signed_in? %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                      <li><%= link_to 'New Task', new_task_path %></li>
-                      <li><%= link_to 'Log Out', destroy_user_session_path, :method => :delete %></li>
+                      <li><a href="#">My page</a></li>
+                      <li class="divider"></li>
+                      <li><%= link_to 'New task', new_task_path %></li>
+                      <li><a href="#">My tasks</a></li>
+                      <li class="divider"></li>
+                      <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
                     </ul>
                 </li>
-                <li><%= link_to 'All Task', tasks_path %></li>
+                <li><%= link_to 'All Tasks', tasks_path %></li>
             <% else %>
                 <li><%= link_to 'Sign In', new_user_session_path %></li>
                 <li><%= link_to 'Sign Up', new_user_registration_path %></li>
@@ -38,11 +45,17 @@
             <li><a href="#">Settings</a></li>
           </ul>
 
+
+
           <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+              <input type="text" class="form-control" placeholder="Search for...">
             </div>
-            <!--<button type="submit" class="btn btn-default">search</button>-->
+
           </form>
 
 
