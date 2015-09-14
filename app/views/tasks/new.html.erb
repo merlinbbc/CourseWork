@@ -42,23 +42,20 @@
 
   <tr ><td>Answer:</td></tr>
 
-  <tr align="right" >
-     <td><textarea  autocomplete="off" id="task_answers" name="task[answers][]"></textarea></td>
+  <tr>
+    <div id = "answers">
+      <td><textarea  autocomplete="off" id="task_answers" name="task[answers][]"></textarea></td>
+    <button type="button" id= "plus" class="btn btn-success" >
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+  </div>
   </tr>
 
-  <tr align="right">
-     <td><textarea  autocomplete="off" id="task_answers" name="task[answers][]"></textarea></td>
-  </tr>
+
 
   <tr align="right">
      <td><%= f.submit %></td>
   </tr>
-    <!--<div id = "answers">
-      <%=f.text_area :answers, as: :array%>
-      <button type="button" id= "plus" class="btn btn-success" >
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
-    </div>-->
 
 <% end %>
 </table>

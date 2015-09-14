@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910113258) do
+ActiveRecord::Schema.define(version: 20150913160950) do
 
   create_table "achievments_users", id: false, force: true do |t|
     t.integer  "user_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150910113258) do
     t.boolean  "status",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "set_mark",       default: false
   end
 
   add_index "attempts", ["task_id"], name: "index_attempts_on_task_id", using: :btree
@@ -85,6 +86,8 @@ ActiveRecord::Schema.define(version: 20150910113258) do
     t.integer  "section_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "mark",            limit: 24, default: 0.0
+    t.integer  "number_of_marks",            default: 0
   end
 
   create_table "users", force: true do |t|
