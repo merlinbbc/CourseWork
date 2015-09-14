@@ -1,14 +1,12 @@
-<div class="hero-unit">
 
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4"><h2>New Task</h2></div>
-    <div class="col-md-4"></div>
-  </div>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4"><h2>New Task</h2></div>
+  <div class="col-md-4"></div>
+</div>
 
-  <div class="field" align="center">
-    <%= form_for :task, url: tasks_path do |f| %>
-        <% if @task.errors.any? %>
+  <%= form_for :task, url: tasks_path do |f| %>
+      <% if @task.errors.any? %>
             <div id="error_explanation">
               <h2>
                 <%= pluralize(@task.errors.count, "error") %> prohibited
@@ -22,35 +20,56 @@
 
             </div>
         <% end %>
-<br>
-<br>
+<br><br>
 <div class="row">
-  <div class="col-md-1">
-    <div class="pull-right">
-      Title:
-    </div><br><br>
-    <div class="pull-right">
-      Section:
-    </div><br><br>
-     <div class="pull-right">
-      Rating:
-    </div><br><br>
-    <div class="pull-right">
-      Answers:
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right ">
+          Title:
+        </div><br><br>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_field :title , :class=>'form-control' %>
+      </div>
     </div>
-
-  </div>
-  <div class="col-md-3">
-    <%= f.text_field :title , :class=>'form-control' %>
-    <%= f.collection_select :section_id, Section.all, :id, :name ,{prompt: "Select a category"}, {class: 'bs-select form-control'} %>
-    <%= f.number_field :rating , 'max'=>10, 'min'=>1, :class=>'form-control' %>
-
-    <div class = "answers">
-      <input class="text optional form-control" type="text" value="" name="task[answers][]" id="task_" >
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          Section:
+        </div><br><br>
+      </div>
+      <div class="col-md-9">
+        <%= f.collection_select :section_id, Section.all, :id, :name ,{prompt: "Select a category"}, {class: 'bs-select form-control'} %>
+      </div>
     </div>
-    <button type="button" id= "plus" class="btn btn-primary center">
-      <span class="glyphicon glyphicon-plus" ></span>
-    </button>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          Rating:
+        </div>
+      </div>
+      <div class="col-md-9">
+        <%= f.number_field :rating , 'max'=>10, 'min'=>1, :class=>'form-control' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          Answers:
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class = "answers">
+          <input class="text optional form-control" type="text" value="" name="task[answers][]" id="task_" >
+        </div>
+        <div class="center">
+          <button type="button" id= "plus" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus" ></span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="col-md-7">
@@ -63,14 +82,5 @@
   <div class="col-md-1"></div>
 </div>
 
-
-<div class="row">
-  <div class="col-md-5"></div>
-  <div class="col-md-2"></div>
-  <div class="col-md-5"></div>
-</div>
-
-
 <% end %>
-  </div>
 </div>

@@ -51,7 +51,7 @@ $(document).ready(function() {
             x++;
             $(".answers").append(
                 '<div class="input-group">' +
-                    '<input type="text" class="form-control" />' +
+                    '<input type="text" class="text optional form-control" name="task[answers][]" value="" id="task_" />' +
                     '<span class="input-group-btn">' +
                         '<div class="remove_field">' +
                             '<button class="btn btn-default" type="button">' +
