@@ -19,75 +19,121 @@
 //= require turbolinks
 //= require_tree
 
-var ready;
-ready = function() {
 
-    /*$('#add-comment').click(function() {
-        var task_id = $('#submitans').attr('data-task-id');
-        var comment = $('#text-area').val();
-        $.ajax({
-            type: 'POST',
-            url: "http://localhost:3000/comments/create/",
-            data:{
-                comment:{
-                    description: comment,
-                    task_id: task_id
-                }
-            },
-            success: function(data){
-                $('#comments').append('<div class="panel panel-default"><div class="panel-heading"><strong>'+data.username+ '</strong> <span class="text-muted">'+ data.time_ago+ '</span> </div><div class="panel-body">'+data.description+'</div></div>')},
+$(document).ready(function() {
 
-            error: function(data){
-                //authFail();
-            }
-        });
-    });*/
+    /* $('#add-comment').click(function() {
+     var task_id = $('#submitans').attr('data-task-id');
+     var comment = $('#text-area').val();
+     $.ajax({
+     type: 'POST',
+     url: "http://localhost:3000/comments/create/",
+     data:{
+     comment:{
+     description: comment,
+     task_id: task_id
+     }
+     },
+     success: function(data){
+     $('#comments').append('<div class="panel panel-default"><div class="panel-heading"><strong>'+data.username+ '</strong> <span class="text-muted">'+ data.time_ago+ '</span> </div><div class="panel-body">'+data.description+'</div></div>')},
 
-    $('#plus').click(function() {
+     error: function(data){
+     }
+     });
+     });*/
+
+    $('#plus').click(function () {
         $('#answers').append('<input class="text optional" type="text" value="" name="task[answers][]" id="task_" >');
     });
 
-$('#submitans').click(function() {
-    var id = $('#submitans').attr('data-task-id');
-    var answer = $('#answer').val();
-    //var complexibility = $('#submitans').attr('data-task-complexibility');
-    $.ajax({
-        type: 'POST',
-        url: id + "/decision" + "?answer=" + answer /*+ "&complexibility=" + complexibility*/ ,
-        success: function(data){
-            if (data.flag == "correct"){
-                $('#icon').attr('class','glyphicon glyphicon-ok-circle');
-                $('#answerfield').remove();
-                alert("Gooood motherfucker");
+    $('#submitans').click(function () {
+        var id = $('#submitans').attr('data-task-id');
+        var answer = $('#answer').val();
+        //var complexibility = $('#submitans').attr('data-task-complexibility');
+        $.ajax({
+            type: 'POST',
+            url: id + "/decision" + "?answer=" + answer /*+ "&complexibility=" + complexibility*/,
+            success: function (data) {
+                if (data.flag == "correct") {
+                    $('#icon').attr('class', 'glyphicon glyphicon-ok-circle');
+                    $('#answerfield').remove();
+                    alert("Gooood motherfucker");
+                }
+                else
+                    $('#icon').attr('class', 'glyphicon glyphicon-remove-circle');
+            },
+            error: function (data) {
             }
-            else
-                $('#icon').attr('class','glyphicon glyphicon-remove-circle');
-        },
-        error: function(data){
-        }
+        });
     });
-});
 
-    $('#submitanss').click(function() {
+    $('#submitanss').click(function () {
         var id = $('#submitanss').attr('data-task-id');
         var mark = $('#markk').val();
         $.ajax({
             type: 'POST',
             url: id + "/marks" + "?mark=" + mark,
-            success: function(data){
-                if (data.flag == "correct"){
+            success: function (data) {
+                if (data.flag == "correct") {
                     alert("good");
-                    $('#markfield').remove();}
+                    $('#markfield').remove();
+                }
                 else
                     alert("Max mark = 10, min mark = 1");
             },
-            error: function(data){
+            error: function (data) {
+
+//authFail();
             }
         });
     });
 
+    var x = 1;
+    $('#plus').click(function (e) {
+        e.preventDefault();
+        if (x < 5) {
+            x++;
+            $(".answers").append(
+                '<div class="input-group">' +
+                '<input type="text" class="text optional form-control" name="task[answers][]" value="" id="task_" />' +
+                '<span class="input-group-btn">' +
+                '<div class="remove_field">' +
+                '<button class="btn btn-default" type="button">' +
+                '<span class="glyphicon glyphicon-remove"></span>' +
+                '</button>' +
+                '</div>' +
+                '</span>' +
+                '</div>');
+        }
+        if (x == 5) $('#plus').css('visibility', 'hidden');
+    });
 
-};
+    $(".answers").on("click", ".remove_field", function (e) {
+        e.preventDefault();
+        $(this).parent().parent().remove();
+        x--;
+        $('#plus').css('visibility', 'visible');
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+    });
+
+    $('#submitans').click(function () {
+        var id = $('#submitans').attr('data-task-id');
+        var answer = $('#answer').val();
+        var complexibility = $('#submitans').attr('data-task-complexibility');
+        $.ajax({
+            type: 'POST',
+            url: id + "/decision" + "?answer=" + answer + "&complexibility=" + complexibility,
+            success: function (data) {
+                if (data.flag == "correct") {
+                    $('#icon').attr('class', 'glyphicon glyphicon-ok');
+//$('#answerfield').hide()
+                }
+                else
+                    $('#icon').attr('class', 'glyphicon glyphicon-remove');
+            },
+            error: function (data) {
+//authFail();
+            }
+        });
+    });
+});
