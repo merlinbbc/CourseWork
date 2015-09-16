@@ -47,22 +47,28 @@
 
 
 
+          <%= form_for search_path, method: :get do |f| %>
+
           <form class="navbar-form navbar-right" role="search">
 
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
+                <%= submit_tag "Go", name: nil, :class => "btn btn-default" %>
               </span>
-              <input type="text" class="form-control" placeholder="Search for...">
+
+              <%= text_field_tag :q, params[:q], :class => "form-control", :placeholder => "Search for..." %>
+
             </div>
 
           </form>
 
-
+        <% end %>
 
           </div>
       </div>
     </nav>
+
+
     <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>

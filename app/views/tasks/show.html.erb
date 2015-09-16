@@ -10,6 +10,15 @@
     </td>
   </tr>
   <tr>
+    <td>
+      Tags:
+      <% @task.tag_list.each do |tag| %>
+        <%= link_to tag %>
+      <% end %>
+
+    </td>
+  </tr>
+  <tr>
     <td><h4>Author: <%= User.find_by(current_user.id).email %></h4></td>
   </tr>
   <tr>

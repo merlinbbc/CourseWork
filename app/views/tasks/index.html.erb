@@ -1,38 +1,63 @@
 <div class="center">
-<h1>Listing Task</h1>
+<h1>Task Listing</h1>
+</div>
+<div class="row">
+  <div class="col-md-6">
+  <% @tasks.each do |task| %>
+        <table width="40%" class=margin-left>
+          <tr >
+            <% if (Attempt.where({user_id: current_user.id, task_id: task.id})).empty? or (Attempt.where({user_id: current_user.id, task_id: task.id})).last.set_mark%>
+                <td width="10%"><h4><%= link_to task.title, task_path(task) %><br><br>Rating: <%= task.rating %></h4></td>
+            <% else %>
+                <td width="10%"><h4><%= link_to task.title, task_path(task) %> <font color="#8b0000"><i>Please, set mark) </i></font><br><br>Rating: <%= task.rating %></h4></td>
+            <% end %>
+
+          </tr>
+
+          <tr><br></tr>
+          <tr>
+            <td>
+              <h4>Mark: <%= task.mark %></h4>
+            </td>
+          </tr>
+          <tr>
+
+            <td>
+            tags: <%= raw task.tag_list.map { |t| link_to t , tag_path(t)}.join(', ') %>
+
+            </td>
+          </tr>
+          <tr><br></tr>
+          <tr>
+            <td width="40%">Condition: <%=markdown(task.text)%></td>
+          </tr>
+          <tr></tr>
+          <tr>
+            <td><% if current_user.id == task.author_id %>
+                  <%= link_to 'Edit', edit_task_path(task) %>
+                  <%= link_to 'Destroy', task_path(task),
+                              method: :delete,
+                              data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+
+
+    <% end %>
+      </div>
+  <div class="col-md-6">
+    <div style="margin-top: 30%;">
+
+      <% tag_cloud Tag.all, %w(css1 css2 css3 css4) do |tag, css_class| %>
+          <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
+      <% end %>
+
+    </div>
+  </div>
 </div>
 
-  <% @tasks.each do |task| %>
-    <table width="40%" class=margin-left>
-      <tr >
-        <% if (Attempt.where({user_id: current_user.id, task_id: task.id})).empty? or (Attempt.where({user_id: current_user.id, task_id: task.id})).last.set_mark%>
-            <td width="10%"><h4><%= link_to task.title, task_path(task) %><br><br>Rating: <%= task.rating %></h4></td>
-        <% else %>
-            <td width="10%"><h4><%= link_to task.title, task_path(task) %> <font color="#8b0000"><i>Please, set mark) </i></font><br><br>Rating: <%= task.rating %></h4></td>
-        <% end %>
 
-      </tr>
-      </tr>
-      <tr><br></tr>
-      <tr>
-      <tr>
-        <td>
-          <h4>Mark: <%= task.mark %></h4>
-        </td>
-      </tr>
-      <tr><br></tr>
-      <tr>
-        <td width="40%"><%=markdown(task.text)%></td>
-      </tr>
-      <tr></tr>
-      <tr>
-        <td><% if current_user.id == task.author_id %>
-              <%= link_to 'Edit', edit_task_path(task) %>
-              <%= link_to 'Destroy', task_path(task),
-                          method: :delete,
-                          data: { confirm: 'Are you sure?' } %>
-          <% end %>
-        </td>
-      </tr>
-    </table>
-  <% end %>
+
+
+
