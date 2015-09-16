@@ -1,6 +1,49 @@
-<html>
-    <head>
-      <title> qwer</title>
-    </head>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-4">
+    <h2>Top 10 tasks</h2>
+    <% @tasks.each do |t| %>
+        <font color="#1e90ff"><h3><%= link_to t.title, task_path(t) %></h3></font>
+        <h4>Solved: <font color="#228b22" ><%= Attempt.where({ task_id: t.id, status: true }).count %></font><br>
+          Unsolved: <font color="red" ><%= Attempt.where({ task_id: t.id, status: false }).count %></font><br>
+          Rating: <%= t.rating %><br>
+          Mark: <%= t.mark %><br>
+          Section: <%= t.section.name %><br>
+          Condition:</h4>
+        <div style = "outline: 2px solid #000;">
+          <%=markdown(t.text)%>
+        </div>
+        <br>
+        <%if current_user%>
+        <% if current_user.id == t.author_id %>
+            <%= link_to 'Edit', edit_task_path(t), class: 'btn btn-primary' %>
+            <%= link_to 'Destroy', task_path(t), class: 'btn btn-primary',
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' }%>
+        <% end %>
+        <% end %>
+        <div style="color: blue;"><hr></div>
 
-</html>
+    <% end %>
+  </div>
+
+
+
+  <div class="col-md-2"></div>
+
+
+  <div class="col-md-4">
+    <h2>Top 10 users</h2>
+    <% @users.each do |u| %>
+        <% if u.nickname != "" %>
+            <h3>Nickname:  <%= link_to u.nickname, user_path(u) %></h3>
+        <% else %>
+            <h3>Email:  <%= u.email %></h3>
+        <% end %>
+        <h3>Rating user: <%= u.rating %></h3>
+        <hr>
+    <% end %>
+  </div>
+  <div class="col-md-1"></div>
+
+</div>

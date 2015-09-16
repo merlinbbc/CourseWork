@@ -1,75 +1,91 @@
-
-
-<div class="hero-unit">
-  <h2>Editing task</h2>
-  <div class="field" align="center">
-    <%= form_for :task, url: task_path(@task), method: :patch do |f| %>
-        <% if @task.errors.any? %>
-            <div id="error_explanation">
-              <h2>
-                <%= pluralize(@task.errors.count, "error") %> prohibited
-                this task from being saved:
-              </h2>
-              <ul>
-                <% @task.errors.full_messages.each do |msg| %>
-                    <%= msg %></br>
-                <% end %>
-              </ul>
-
-            </div>
-        <% end %>
-
-        <table >
-
-          <tr align="right">
-            <td>Title:  <%= f.text_field :title %> </td>
-          </tr>
-
-          <tr align="right">
-            <td>Sections:    <%= f.select :section_id, options_from_collection_for_select(Section.all, :id, :name) %></td>
-          </tr>
-
-          <tr >
-            <td> Text: </td>
-          </tr>
-
-          <tr align="right">
-
-            <td> <%= f.text_area :text %> </td>
-          </tr>
-
-          <tr align="right">
-            <td> Rating:    <%= f.number_field :rating , 'max'=>10, 'min'=>1%> </td>
-          </tr>
-
-          <tr ><td>Answer:</td></tr>
-
-          <tr align="right" >
-            <td><textarea  autocomplete="off" id="task_answers" name="task[answers][]"></textarea></td>
-          </tr>
-
-          <tr align="right">
-            <td><textarea  autocomplete="off" id="task_answers" name="task[answers][]"></textarea></td>
-          </tr>
-
-          <tr align="right">
-            <td><%= f.submit %></td>
-
-          </tr>
-          <tr align="right">
-            <td><%= link_to 'Back', task_path %></td>
-          </tr>
-
-
-
-          <!--<div id = "answers">
-      <%=f.text_area :answers, as: :array%>
-      <button type="button" id= "plus" class="btn btn-success" >
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
-    </div>-->
-
-    <% end %>
-    </table>
-  </div>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4"><h2>Edit Task</h2></div>
+  <div class="col-md-4"></div>
 </div>
+
+<%= form_for :task, url: task_path(@task), method: :patch do |f| %>
+    <% if @task.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@task.errors.count, "error") %> prohibited
+            this task from being saved:
+          </h2>
+          <ul>
+            <% @task.errors.full_messages.each do |msg| %>
+                <%= msg %></br>
+            <% end %>
+          </ul>
+
+        </div>
+    <% end %>
+    <br><br>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right ">
+              Title:
+            </div><br><br>
+          </div>
+          <div class="col-md-9">
+            <%= f.text_field :title , :class=>'form-control' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right">
+              Section:
+            </div><br><br>
+          </div>
+          <div class="col-md-9">
+            <%= f.collection_select :section_id, Section.all, :id, :name ,{prompt: "Select a category"}, {class: 'bs-select form-control'} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right">
+              Rating:
+            </div>
+          </div>
+          <div class="col-md-9">
+            <%= f.number_field :rating , 'max'=>10, 'min'=>1, :class=>'form-control' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right">
+              Answers:
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class = "answers">
+              <% @task.answers.each do |a| %>
+              <input class="text optional form-control" type="text" value="<%= a %>" name="task[answers][]" id="task_" >
+                  <% end %>
+            </div>
+            <div class="center">
+              <button type="button" id= "plus" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus" ></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-7">
+        <div class="pull-left">
+          Text:
+        </div><br>
+        <%= f.text_area :text, 'data-provide'=>'markdown', :rows=>'12' %><br><br>
+        <%= f.submit "Save task", class: "btn btn-primary pull-left"  %>
+        <%= link_to 'Back', task_path, class: "btn btn-primary pull-left"%>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+
+<% end %>
+</div>
+
+

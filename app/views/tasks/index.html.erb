@@ -8,7 +8,8 @@
         <% if (Attempt.where({user_id: current_user.id, task_id: task.id})).empty? or (Attempt.where({user_id: current_user.id, task_id: task.id})).last.set_mark%>
             <td width="10%"><h4><%= link_to task.title, task_path(task) %><br><br>Rating: <%= task.rating %></h4></td>
         <% else %>
-            <td width="10%"><h4><%= link_to task.title, task_path(task) %> <font color="#8b0000"><i>Please, set mark) </i></font><br><br>Rating: <%= task.rating %></h4></td>
+            <td width="10%"><h4><%= link_to task.title, task_path(task) %> <font color="#8b0000"><i>Please, set mark) </i></font>
+              <br><br>Rating: <%= task.rating %></h4></td>
         <% end %>
 
       </tr>
@@ -22,7 +23,9 @@
       </tr>
       <tr><br></tr>
       <tr>
-        <td width="40%"><%=markdown(task.text)%></td>
+        <td width="40%"><div style = "outline: 2px solid #000;">
+          <%=markdown(task.text)%>
+        </div></td>
       </tr>
       <tr></tr>
       <tr>

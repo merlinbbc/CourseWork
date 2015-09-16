@@ -22,27 +22,28 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav pull-left">
-            <li><a href="#">Home page</a></li>
+            <li><%= link_to 'Home page', root_path %></li>
           </ul>
           <ul class="nav navbar-nav pull-right" >
             <% if user_signed_in? %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                      <li><a href="#">My page</a></li>
+                      <li><%= link_to 'My page', user_path(current_user.id) %></li>
                       <li class="divider"></li>
                       <li><%= link_to 'New task', new_task_path %></li>
-                      <li><a href="#">My tasks</a></li>
+                      <li><%= link_to 'My tasks', mytask_path %></li>
                       <li class="divider"></li>
                       <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
                     </ul>
                 </li>
                 <li><%= link_to 'All Tasks', tasks_path %></li>
+                <li><%= link_to 'Settings', edit_user_path(current_user.id)  %></li>
             <% else %>
                 <li><%= link_to 'Sign In', new_user_session_path %></li>
                 <li><%= link_to 'Sign Up', new_user_registration_path %></li>
             <% end %>
-            <li><a href="#">Settings</a></li>
+
           </ul>
 
 

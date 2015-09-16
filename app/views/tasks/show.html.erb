@@ -1,65 +1,92 @@
-<table width="40%" class=margin-left>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2" style="margin-top: 5%;">
+    <h4>
+      Solved: <font color="#228b22" ><%= Attempt.where({ task_id: @task.id, status: true }).count %></font><br>
+      Unsolved: <font color="red" ><%= Attempt.where({ task_id: @task.id, status: false }).count %></font><br>
+      Rating: <%= @task.rating %><br>
+      Mark: <%= @task.mark %><br>
+      Author:
+      <% if (nick = User.where({id: @task.author_id }).last.nickname) != "" %>
+          <%= nick %><br>
+      <% else %>
+          <%= User.where({id: @task.author_id}).last.email %><br>
+      <% end %>
+      Section: <%= @task.section.name %>
+    </h4>
 
-  <tr >
-    <td width="10%"><h4><%=@task.title%><br><br>
-      Rating: <%= @task.rating %></h4></td>
-  </tr>
-  <tr>
-    <td>
-      <h4>Mark: <%= @task.mark %></h4>
-    </td>
-  </tr>
-  <tr>
-    <td><h4>Author: <%= User.find_by(current_user.id).email %></h4></td>
-  </tr>
-  <tr>
-    <td><h4>Section: <%= @task.section.name %></h4></td>
-  </tr>
-
-  <tr>
-    <td width="40%"><%=markdown(@task.text)%></td>
-  </tr>
-
-  <% if current_user.id == @task.author_id %>
-      <tr>
-          <td><h4>Answers:</h4></td>
-      </tr>
-
+  </div>
+  <div class="col-md-4">
+    <font color="#1e90ff"><h2><%=@task.title%></h2></font>
+    <h4>Condition:</h4><br>
+    <div style = "outline: 2px solid #000;">
+      <%=markdown(@task.text)%>
+    </div>
+    <% if current_user.id == @task.author_id %>
+        <h4>Answers:</h4>
         <% @task.answers.each do |a| %>
-          <tr><td><%= a %></br></td></tr>
+            <%= a %><br>
         <% end %>
-
-      <tr>
-        <td></br> <%= link_to 'Edit', edit_task_path(@task) %>
-             <%= link_to 'Destroy', task_path(@task),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' } %>
-  <% end %>
-            <%= link_to 'Back', tasks_path, class: 'btn btn-primary' %></td>
-        </tr>
-    <% if current_user.id != @task.author_id %>
-        <% if Attempt.where({ task_id: @task.id, user_id: current_user.id }).empty? or
-            !(Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.status %>
-            <tr>
-              <td>
-                <div id="answerfield"><input type="text" placeholder="Your answer" id = "answer"/>
-                  <button id="submitans" data-task-id="<%= @task.id %>" >Check </button>
-                  <span id='icon' class=" "></span>
-                </div>
-              </td>
-            </tr>
-        <% elsif (Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.status and
-              current_user.id != @task.author_id and
-                !(Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.set_mark %>
-            <tr>
-              <td>
-                <div id="markfield"><input type="text" placeholder="Your mark" id = "markk"/>
-                    <button id="submitanss" data-task-id="<%= @task.id %>" >Check </button>
-                </div>
-              </td>
-            </tr>
-        <% end %>
+        </br> <%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-primary' %>
+            <%= link_to 'Destroy', task_path(@task), class: 'btn btn-primary',
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
     <% end %>
 
+    <% if current_user.id != @task.author_id %>
+        <% if Attempt.where({ task_id: @task.id, user_id: current_user.id }).empty? or
+                !(Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.status %>
 
-</table>
+                <div id="answerfield"><input type="text" placeholder="Your answer" id = "answer"/>
+                  <button id="submitans" data-task-id="<%= @task.id %>">
+                          Check </button>
+                  <span id='icon' class=" "></span>
+                </div>
+
+        <% elsif (Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.status and
+                current_user.id != @task.author_id and
+                !(Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.set_mark %>
+
+                <div id="markfield"><input type="text" placeholder="Your mark" id = "markk"/>
+                  <button id="submitanss" data-task-id="<%= @task.id %>" >Check </button>
+                </div>
+        <% end %>
+    <% end %>
+    <div class="row">
+      <div class="col-md-2" style = "margin-top: 10%;">
+        <%= link_to 'Back', tasks_path, class: 'btn btn-primary' %>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-4" style="margin-top: 4%;">
+    <font color="#1e90ff>"><h4>Comments:</h4></font>
+    <div class = "col-sm-12" id = "comments" >
+      <% @task.comments.each do |comment| %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <strong>
+                <%= User.where({id: comment.user_id}).last.email %>
+              </strong>
+            </div>
+            <div class="panel-body">
+              <%= comment.this_comment %>
+
+              <% if comment.user_id == current_user.id %>
+                <div class= "delete" data-comment-id="<%= comment.id%>" ><span class="glyphicon glyphicon-remove"></span></div>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <h4>Add a comment:</h4>
+    <textarea id = "text-area" class="form-control" columns="5"></textarea>
+    <button id="add-comment" data-task-id="<%= @task.id %>">Add comment </button>
+
+  </div>
+
+</div>
+

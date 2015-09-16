@@ -4,7 +4,11 @@ class TasksController < ApplicationController
 
 
   def index
-    @tasks = Task.all
+    @tasks = Task.order(created_at: :desc)
+  end
+
+  def user_task
+    @tasks = Task.where({author_id: current_user.id})
   end
 
   def new
@@ -69,7 +73,7 @@ class TasksController < ApplicationController
         @attempt.save
       end
       @user = current_user
-      #@user.rating += params[:сложность].to_i
+      @user.rating += @task.rating.to_i * 10 - @attempt.attempts_count + 1
       @user.save
       render json: {flag: "correct"}
     else
@@ -131,8 +135,6 @@ class TasksController < ApplicationController
     @attempt.attempts_count += 1
     @attempt.save
   end
-  def render_new
-    render 'new'
-  end
+
 
 end

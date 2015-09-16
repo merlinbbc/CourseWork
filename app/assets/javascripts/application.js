@@ -22,25 +22,41 @@
 
 $(document).ready(function() {
 
-    /* $('#add-comment').click(function() {
-     var task_id = $('#submitans').attr('data-task-id');
+    $('#add-comment').click(function() {
+     var task_id = $('#add-comment').attr('data-task-id');
      var comment = $('#text-area').val();
      $.ajax({
-     type: 'POST',
-     url: "http://localhost:3000/comments/create/",
+     type: 'POST', url: "http://localhost:3000/comments/create/",
      data:{
-     comment:{
-     description: comment,
-     task_id: task_id
-     }
+         comment:{
+             this_comment: comment,
+             task_id: task_id
+         }
      },
      success: function(data){
-     $('#comments').append('<div class="panel panel-default"><div class="panel-heading"><strong>'+data.username+ '</strong> <span class="text-muted">'+ data.time_ago+ '</span> </div><div class="panel-body">'+data.description+'</div></div>')},
+     $('#comments').append('<div class="panel panel-default"><div class="panel-heading"><strong>'+
+         data.email +
+         '</strong> </div><div class="panel-body">' +
+         data.text + '<div class= "delete" data-comment-id=" ' + data.id + '"><span class="glyphicon glyphicon-remove"></span></div>' +
+         '</div></div>')},
 
      error: function(data){
      }
      });
-     });*/
+     });
+
+    $('#comments').delegate('.delete',"click",function(){
+        $($($(this).parent()).parent()).hide("fast")
+        var id = $(this).attr('data-comment-id');
+        $.ajax({
+            type: 'POST',
+            url: "http://localhost:3000/comments/"+ id,
+            data: {"_method":"delete"},
+        })
+    });
+
+
+
 
     $('#plus').click(function () {
         $('#answers').append('<input class="text optional" type="text" value="" name="task[answers][]" id="task_" >');
@@ -49,10 +65,9 @@ $(document).ready(function() {
     $('#submitans').click(function () {
         var id = $('#submitans').attr('data-task-id');
         var answer = $('#answer').val();
-        //var complexibility = $('#submitans').attr('data-task-complexibility');
         $.ajax({
             type: 'POST',
-            url: id + "/decision" + "?answer=" + answer /*+ "&complexibility=" + complexibility*/,
+            url: id + "/decision" + "?answer=" + answer,
             success: function (data) {
                 if (data.flag == "correct") {
                     $('#icon').attr('class', 'glyphicon glyphicon-ok-circle');
@@ -116,24 +131,4 @@ $(document).ready(function() {
 
     });
 
-    $('#submitans').click(function () {
-        var id = $('#submitans').attr('data-task-id');
-        var answer = $('#answer').val();
-        var complexibility = $('#submitans').attr('data-task-complexibility');
-        $.ajax({
-            type: 'POST',
-            url: id + "/decision" + "?answer=" + answer + "&complexibility=" + complexibility,
-            success: function (data) {
-                if (data.flag == "correct") {
-                    $('#icon').attr('class', 'glyphicon glyphicon-ok');
-//$('#answerfield').hide()
-                }
-                else
-                    $('#icon').attr('class', 'glyphicon glyphicon-remove');
-            },
-            error: function (data) {
-//authFail();
-            }
-        });
-    });
 });
