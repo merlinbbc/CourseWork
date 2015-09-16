@@ -1,0 +1,19 @@
+<h1>Articles Search</h1>
+
+<%= form_for search_path, method: :get do |f| %>
+    <p>
+      <%= f.label "Search for" %>
+      <%= text_field_tag :q, params[:q] %>
+      <%= submit_tag "Go", name: nil %>
+    </p>
+<% end %>
+
+<ul>
+  <% @tasks.each do |tasks| %>
+      <li>
+        <h3>
+          <%= link_to task.title, controller: "tasks", action: "show", id: task._id %>
+        </h3>
+      </li>
+  <% end %>
+</ul>

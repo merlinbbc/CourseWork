@@ -27,6 +27,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (3.5.0)
+      activerecord (>= 3.2, < 5)
     arel (5.0.1.20140414130214)
     autoprefixer-rails (6.0.2)
       execjs
@@ -52,6 +54,19 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    elasticsearch (1.0.13)
+      elasticsearch-api (= 1.0.13)
+      elasticsearch-transport (= 1.0.13)
+    elasticsearch-api (1.0.13)
+      multi_json
+    elasticsearch-model (0.1.7)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.7)
+    elasticsearch-transport (1.0.13)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.6.0)
     faker (1.5.0)
@@ -190,10 +205,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on (~> 3.4)
   autoprefixer-rails
   bootstrap-sass (~> 3.3.1)
   coffee-rails (~> 4.0.0)
   devise
+  elasticsearch-model
+  elasticsearch-rails
   faker
   jbuilder (~> 2.0)
   jquery-rails

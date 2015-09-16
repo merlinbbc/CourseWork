@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
 
+  get 'tags/:tag', to: 'tasks#index', as: :tag
+
 
   resources :tasks do
     member do
@@ -16,4 +18,7 @@ Rails.application.routes.draw do
   post 'comments/create', to: 'comments#create'
   root "users#index"
   get 'mytask', to: 'tasks#user_task'
+
+  get 'search', to: 'search#search'
+
 end

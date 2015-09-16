@@ -2,13 +2,22 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_task, only: [:show,:update,:edit,:destroy,:decision]
 
+  def tag_cloud
+    @tasks = Task.tag_counts_on(:tags)
+  end
 
   def index
     @tasks = Task.order(created_at: :desc)
+    if params[:tag]
+      @tasks = Task.tagged_with(params[:tag])
+    else
+      @tasks = Task.all
+    end
   end
 
   def user_task
     @tasks = Task.where({author_id: current_user.id})
+
   end
 
   def new
@@ -17,6 +26,7 @@ class TasksController < ApplicationController
   end
 
   def create
+
     @task = Task.new(task_params)
     @task.author_id = current_user.id
     if @task.section_id == nil or !@task.save or @task.answers == [""]
@@ -42,6 +52,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find(params[:id])
+
     @task.destroy
     flash[:success] = "Task was destroyed!"
     redirect_to tasks_path
@@ -52,7 +63,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task.section
   end
 
   def decision
@@ -116,11 +126,11 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title,:text, :rating, :section_id, answers: []);
+    params.require(:task).permit(:title,:text, :rating, :section_id, :tag_list, answers: []);
   end
 
   def new_attempt(st)
-    binding.pry
+    #binding.pry
     @attempt = Attempt.new
     @attempt.task_id = @task.id
     @attempt.user_id = current_user.id
@@ -135,6 +145,8 @@ class TasksController < ApplicationController
     @attempt.attempts_count += 1
     @attempt.save
   end
+
+
 
 
 end

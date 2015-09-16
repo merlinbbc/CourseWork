@@ -1,10 +1,9 @@
 
-<div class="row">
+<div class="row" style="margin-bottom: 4%;">
   <div class="col-md-4"></div>
   <div class="col-md-4"><h2>New Task</h2></div>
   <div class="col-md-4"></div>
 </div>
-
   <%= form_for :task, url: tasks_path do |f| %>
       <% if @task.errors.any? %>
             <div id="error_explanation">
@@ -20,14 +19,13 @@
 
             </div>
         <% end %>
-<br><br>
 <div class="row">
   <div class="col-md-4">
     <div class="row">
       <div class="col-md-3">
-        <div class="pull-right ">
+        <div class="pull-right" style="margin-top: 2%; margin-bottom: 4%" >
           Title:
-        </div><br><br>
+        </div>
       </div>
       <div class="col-md-9">
         <%= f.text_field :title , :class=>'form-control' %>
@@ -35,9 +33,9 @@
     </div>
     <div class="row">
       <div class="col-md-3">
-        <div class="pull-right">
+        <div class="pull-right" style="margin-top: 4%; margin-bottom: 4%" >
           Section:
-        </div><br><br>
+        </div>
       </div>
       <div class="col-md-9">
         <%= f.collection_select :section_id, Section.all, :id, :name ,{prompt: "Select a category"}, {class: 'bs-select form-control'} %>
@@ -45,12 +43,22 @@
     </div>
     <div class="row">
       <div class="col-md-3">
-        <div class="pull-right">
+        <div class="pull-right" style="margin-top: 2%; margin-bottom: 4%" >
           Rating:
         </div>
       </div>
       <div class="col-md-9">
         <%= f.number_field :rating , 'max'=>10, 'min'=>1, :class=>'form-control' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right" style="margin-top: 2%; margin-bottom: 4%" >
+          Tags:
+        </div>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_field :tag_list, :class => 'form-control' %>
       </div>
     </div>
     <div class="row">
