@@ -18,6 +18,13 @@
 //= require bootstrap-markdown-bundle
 //= require turbolinks
 //= require_tree
+//= require best_in_place
+//= require jquery.purr
+//= require jquery-ui
+//= require best_in_place.jquery-ui
+
+
+
 
 
 $(document).ready(function() {
@@ -25,6 +32,7 @@ $(document).ready(function() {
     $('#add-comment').click(function() {
      var task_id = $('#add-comment').attr('data-task-id');
      var comment = $('#text-area').val();
+        $('#text-area').val('');
      $.ajax({
      type: 'POST', url: "http://localhost:3000/comments/create/",
      data:{
@@ -34,12 +42,11 @@ $(document).ready(function() {
          }
      },
      success: function(data){
-     $('#comments').append('<div class="panel panel-default"><div class="panel-heading"><strong>'+
+     $('#comments').append('<div class="panel panel-primary"><div class="panel-heading"><strong>'+
          data.email +
          '</strong> </div><div class="panel-body">' +
          data.text + '<div class= "delete" data-comment-id=" ' + data.id + '"><span class="glyphicon glyphicon-remove"></span></div>' +
          '</div></div>')},
-
      error: function(data){
      }
      });
@@ -53,13 +60,6 @@ $(document).ready(function() {
             url: "http://localhost:3000/comments/"+ id,
             data: {"_method":"delete"},
         })
-    });
-
-
-
-
-    $('#plus').click(function () {
-        $('#answers').append('<input class="text optional" type="text" value="" name="task[answers][]" id="task_" >');
     });
 
     $('#submitans').click(function () {

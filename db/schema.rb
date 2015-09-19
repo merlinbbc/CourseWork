@@ -11,23 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915202759) do
+ActiveRecord::Schema.define(version: 20150917165007) do
 
-  create_table "achievments_users", id: false, force: true do |t|
-    t.integer  "user_id"
-    t.integer  "achievment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "achievments_users", ["achievment_id"], name: "index_achievments_users_on_achievment_id", using: :btree
-  add_index "achievments_users", ["user_id"], name: "index_achievments_users_on_user_id", using: :btree
-
-  create_table "achivements", force: true do |t|
+  create_table "achievements", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "achievements_users", id: false, force: true do |t|
+    t.integer  "user_id"
+    t.integer  "achievement_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "achievements_users", ["achievement_id"], name: "index_achievements_users_on_achievement_id", using: :btree
+  add_index "achievements_users", ["user_id"], name: "index_achievements_users_on_user_id", using: :btree
 
   create_table "attempts", force: true do |t|
     t.integer  "user_id"

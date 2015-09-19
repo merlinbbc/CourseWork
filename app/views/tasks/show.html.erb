@@ -44,7 +44,7 @@
                 <div id="answerfield"><input type="text" placeholder="Your answer" id = "answer"/>
                   <button id="submitans" data-task-id="<%= @task.id %>">
                           Check </button>
-                  <span id='icon' class=" "></span>
+                  <font color="red"><span id='icon' class=" "></span></font>
                 </div>
 
         <% elsif (Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.status and
@@ -70,7 +70,7 @@
     <font color="#1e90ff>"><h4>Comments:</h4></font>
     <div class = "col-sm-12" id = "comments" >
       <% @task.comments.each do |comment| %>
-          <div class="panel panel-default">
+          <div class="panel panel-primary">
             <div class="panel-heading">
               <strong>
                 <%= User.where({id: comment.user_id}).last.email %>
@@ -87,7 +87,8 @@
       <% end %>
     </div>
     <h4>Add a comment:</h4>
-    <textarea id = "text-area" class="form-control" columns="5"></textarea>
+    <textarea id = "text-area" class="form-control" rows="4" maxlength="250"
+              placeholder="Your comment" spellcheck="true"></textarea>
     <button id="add-comment" data-task-id="<%= @task.id %>">Add comment </button>
 
   </div>

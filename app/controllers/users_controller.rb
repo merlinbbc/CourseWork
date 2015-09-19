@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:index]
   before_action :set_user, only: [:show,:update,:edit]
+  respond_to :html, :json
 
   def index
     @users = User.limit(10).order(rating: :desc)
@@ -17,12 +18,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      flash[:success] = "Nickname was updated!"
-      redirect_to @user
-    else
-      render 'edit'
-    end
+    @user.update(user_params)
+    respond_with @user
   end
 
   private

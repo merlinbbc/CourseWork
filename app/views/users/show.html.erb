@@ -1,12 +1,47 @@
 <div class="row">
   <div class="col-md-1"></div>
 
-  <div class="col-md-2">
-    <%= @user.email %>
-    <%= @user.rating %>
+  <div class="col-md-5">
+    <h3>
+      My email: <%= @user.email %><br>
+      My nickname: <%= best_in_place @user, :nickname, :as => :input, :nil => "Click me to add nickname" %><br>
+      My rating: <%= @user.rating %><br>
+    </h3>
 
   </div>
+</div>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2 center">
+    First in Top10:  X <%= get_achiv_boss %><br>
+    <%= image_tag("boss.jpg", height: '241', width: '194') %>
+  </div>
 
+  <div class="col-md-2 center">
+    Your first decide <%= get_discoverer %> tasks<br>
+    <%= image_tag("taskman.jpg", height: '173', width: '95') %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2 center">
+    <% if (id=get_inventor_type) != 0 %>
+        <%= get_achievement_name id %><br>
+        <%= image_tag(set_name(id.to_i-5), height: '185', width: '95') %>
+    <% end %>
+  </div>
+  <div class="col-md-2 center">
+    <% if (id=get_inventor_level) != 0 %>
+        <%= get_achievement_name id %><br>
+        <%= image_tag(set_name(id.to_i-1), height: '185', width: '95') %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+
+
+  </div>
 
 
 </div>

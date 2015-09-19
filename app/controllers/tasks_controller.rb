@@ -32,9 +32,9 @@ class TasksController < ApplicationController
     if @task.section_id == nil or !@task.save or @task.answers == [""]
       flash[:danger] = "Task wasn't created!"
       render 'new'
-    #binding.pry
     else
       flash[:success] = "Task was created!"
+      set_hemorrhoid
       redirect_to @task
     end
   end
@@ -85,6 +85,7 @@ class TasksController < ApplicationController
       @user = current_user
       @user.rating += @task.rating.to_i * 10 - @attempt.attempts_count + 1
       @user.save
+      set_achievements
       render json: {flag: "correct"}
     else
       if Attempt.where({ task_id: @task.id, user_id: current_user.id }).empty?
@@ -146,7 +147,72 @@ class TasksController < ApplicationController
     @attempt.save
   end
 
+  def set_boss_achievement
+    if ( current_user.id == User.order(rating: :desc).first.id )
+      AchievementsUsers.new({achievement_id: 1, user_id: current_user.id}).save
+    end
+  end
 
 
+  def check_achievements(id)
+    if AchievementsUsers.where({achievement_id: id, user_id: current_user.id}).empty?
+      achievement_user = AchievementsUsers.new({achievement_id: id, user_id: current_user.id})
+      achievement_user.save
+    else
+      achievement_user = AchievementsUsers.where({achievement_id: id, user_id: current_user.id})
+      if achievement_user.achievement_id != id
+        achievement_user.update(achievement_id: id, user_id: current_user.id)
+      end
+    end
+  end
+
+  def set_level_achievement
+    case Attempt.where({user_id: current_user.id, status: true}).count
+      when 2..5
+        check_achievements 7
+      when 5..10
+        check_achievements 8
+      when 10..20
+        check_achievements 9
+      when 20..1000
+        check_achievements 10
+    end
+  end
+
+  def set_type_achievement
+    case current_user.rating
+      when 100..250
+        check_achievements 2
+      when 250..500
+        check_achievements 3
+      when 500..1000
+        check_achievements 4
+      when 1000..2500
+        check_achievements 5
+      when 2500..100000
+        check_achievements 6
+    end
+  end
+
+
+  def set_discover
+    if( current_user.id == Attempt.where({status: true}).order(created_at: :desc).first.user_id )
+      AchievementsUsers.new({achievement_id: 11, user_id: current_user.id}).save
+    end
+  end
+
+
+  def set_achievements
+    set_boss_achievement
+    set_level_achievement
+    set_type_achievement
+    set_discover
+  end
+
+  def set_hemorrhoid
+    if Task.where({author_id: current_user.id}).count == 10
+      AchievementsUsers.new({achievement_id: 12, user_id: current_user.id}).save
+    end
+  end
 
 end

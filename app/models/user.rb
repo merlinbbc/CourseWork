@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :author_tasks, foreign_key: "author_id", class_name: 'Taks'
 
-  has_and_belongs_to_many :achivements
+  has_and_belongs_to_many :achievements
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,

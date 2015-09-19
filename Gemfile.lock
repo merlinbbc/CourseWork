@@ -34,6 +34,9 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     bootstrap-sass (3.3.5)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
@@ -85,6 +88,8 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     json (1.8.3)
     jwt (1.5.1)
     less (2.6.0)
@@ -99,6 +104,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.6.1)
+    mini_magick (4.3.3)
     minitest (5.8.0)
     multi_json (1.11.2)
     multi_xml (0.5.5)
@@ -207,6 +213,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on (~> 3.4)
   autoprefixer-rails
+  best_in_place (~> 3.0.1)
   bootstrap-sass (~> 3.3.1)
   coffee-rails (~> 4.0.0)
   devise
@@ -216,7 +223,9 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   less-rails
+  mini_magick
   mysql2 (= 0.3.19)
   omniauth
   omniauth-facebook
