@@ -21,7 +21,7 @@
     <% end %>
     <br><br>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4" style = "margin-top: 2%;" >
         <div class="row">
           <div class="col-md-3">
             <div class="pull-right ">
@@ -59,9 +59,21 @@
             </div>
           </div>
           <div class="col-md-9">
-            <div class = "answers">
+            <div class = "answers" id="count">
               <% @task.answers.each do |a| %>
-              <input class="text optional form-control" type="text" value="<%= a %>" name="task[answers][]" id="task_" >
+
+                  <div class="input-group">
+                    <input type="text" class="text optional form-control" name="task[answers][]" value="<%= a %>" id="task_" />
+                    <span class="input-group-btn">
+                      <div class="remove_field">
+                        <button class="btn btn-default" type="button">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                      </div>
+                    </span>
+                  </div>
+
+
                   <% end %>
             </div>
             <div class="center">
@@ -79,7 +91,7 @@
           Text:
         </div><br>
         <%= f.text_area :text, 'data-provide'=>'markdown', :rows=>'12' %><br><br>
-        <%= f.submit "Save task", class: "btn btn-primary pull-left"  %>
+        <%= f.submit "Save task", class: "btn btn-primary pull-left" , :style => "margin-right: 1%;"%>
         <%= link_to 'Back', task_path, class: "btn btn-primary pull-left"%>
       </div>
       <div class="col-md-1"></div>

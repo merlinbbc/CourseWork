@@ -20,7 +20,7 @@
             </div>
         <% end %>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-4" style = "margin-top: 2%;" >
     <div class="row">
       <div class="col-md-3">
         <div class="pull-right" style="margin-top: 2%; margin-bottom: 4%" >
@@ -68,8 +68,19 @@
         </div>
       </div>
       <div class="col-md-9">
-        <div class = "answers">
-          <input class="text optional form-control" type="text" value="" name="task[answers][]" id="task_" >
+        <div class = "answers" id="count">
+
+          <div class="input-group">
+            <input type="text" class="text optional form-control" name="task[answers][]" value="" id="task_" />
+            <span class="input-group-btn">
+              <div class="remove_field">
+                <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-remove"></span>
+                </button>
+              </div>
+            </span>
+          </div>
+
         </div>
         <div class="center">
           <button type="button" id= "plus" class="btn btn-primary">
@@ -79,7 +90,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="col-md-7">
     <div class="pull-left">

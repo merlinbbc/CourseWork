@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post "markdown/preview"
   post 'comments/create', to: 'comments#create'
   root "users#index"
+
   get 'mytask', to: 'tasks#user_task'
 
   get 'search', to: 'search#search'

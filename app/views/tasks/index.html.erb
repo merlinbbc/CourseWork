@@ -1,59 +1,117 @@
 <div class="center">
-<h1>Task Listing</h1>
+<h1 style="margin-bottom: 0%; ">Task Listing</h1>
 </div>
 <div class="row">
   <div class="col-md-6">
+    <div class="center"><%= paginate @tasks %></div>
   <% @tasks.each do |task| %>
-
-        <table width="40%" class=margin-left>
-          <tr >
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10 center">
+            <h3 style= "margin-top: 10%;"><%= link_to task.title, task_path(task) %></h3>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+        <hr class="hr1">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-3">
+            <div class="pull-right">
+              <h4>Section: </h4>
+            </div>
+          </div>
+          <div class="col-md-3 center">
+            <h4><%= task.section.name %></h4>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <hr class="hr1">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-3">
+            <div class="pull-right">
+              <h4>Author: </h4>
+            </div>
+          </div>
+          <div class="col-md-3 center">
+            <h4><%= User.where({id: task.author_id} ).last.email %></h4>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <hr class="hr1">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-3">
+            <div class="pull-right">
+              <h4>Rating: </h4>
+            </div>
+          </div>
+          <div class="col-md-3 center">
+            <h4><%= task.rating %></h4>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <hr class="hr1">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-3 ">
+            <div class="pull-right">
+              <h4>Mark: </h4>
+            </div>
+          </div>
+          <div class="col-md-3 center">
             <% if (Attempt.where({user_id: current_user.id, task_id: task.id})).empty? or (Attempt.where({user_id: current_user.id, task_id: task.id})).last.set_mark%>
-                <td width="10%"><h4><%= link_to task.title, task_path(task) %><br><br>Rating: <%= task.rating %></h4></td>
+                <h4><%= task.mark %></h4>
             <% else %>
-                <td width="10%"><h4><%= link_to task.title, task_path(task) %> <font color="#8b0000"><i>Please, set mark) </i></font><br><br>Rating: <%= task.rating %></h4></td>
+                <h4><i>Please, set mark)</i></h4>
             <% end %>
-
-          </tr>
-
-          <tr><br></tr>
-          <tr>
-            <td>
-              <h4>Mark: <%= task.mark %></h4>
-            </td>
-          </tr>
-          <tr>
-
-            <td>
-            tags: <%= raw task.tag_list.map { |t| link_to t , tag_path(t)}.join(', ') %>
-
-            </td>
-          </tr>
-          <tr><br></tr>
-          <tr>
-            <td width="40%"><div style = "outline: 2px solid #000;">
-              <%=markdown(task.text)%>
-            </div></td>
-          </tr>
-          <tr></tr>
-          <tr>
-            <td><% if current_user.id == task.author_id %>
-                  <%= link_to 'Edit', edit_task_path(task) %>
-                  <%= link_to 'Destroy', task_path(task),
-                              method: :delete,
-                              data: { confirm: 'Are you sure?' } %>
-              <% end %>
-            </td>
-          </tr>
-        </table>
-
-
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <hr class="hr1">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 center">
+            <h5><%= raw task.tag_list.map { |t| link_to t , tag_path(t)}.join(', ') %></h5>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <hr class="hr1">
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+            <h4>Condition:</h4>
+            <div style = "outline: 2px solid #eeeeee; margin-top: 5%; width: 100%;">
+              <%= markdown(task.text)%>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+        <% if current_user.id == task.author_id %>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <div class="center">
+              <%= link_to 'Edit', edit_task_path(task), :class => "btn btn-primary" %>
+            </div>
+          </div>
+          <div class="col-md-2" style="margin-bottom: 5%;">
+            <div class="pull-right">
+                <%= link_to 'Destroy', task_path(task),
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+        <% end %>
+        <hr class="hr2">
     <% end %>
       </div>
   <div class="col-md-6">
-    <div style="margin-top: 30%;">
-
-      <% tag_cloud Tag.all, %w(css1 css2 css3 css4) do |tag, css_class| %>
-          <%= link_to tag.name, tag_path(tag.name), :class => css_class %>
+    <div id = "tag_cloud">
+      <% tag_cloud Task.tag_counts, %w(s m l) do |tag, css_class| %>
+          <%= link_to tag.name, tag_path(tag.name), class: css_class , :style => "margin-left: 4%;" %>
       <% end %>
 
     </div>

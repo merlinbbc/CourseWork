@@ -22,6 +22,14 @@
 
 $(document).ready(function() {
 
+    $('#searchGo').click(function(event){
+            var qField = document.getElementById("searchField").value;
+            event.preventDefault();
+            query = "http://localhost:3000/search?utf8=%E2%9C%93&q=" + qField;
+            window.location.href = query;
+        }
+    );
+
     $('#add-comment').click(function() {
      var task_id = $('#add-comment').attr('data-task-id');
      var comment = $('#text-area').val();
@@ -56,11 +64,6 @@ $(document).ready(function() {
     });
 
 
-
-
-    $('#plus').click(function () {
-        $('#answers').append('<input class="text optional" type="text" value="" name="task[answers][]" id="task_" >');
-    });
 
     $('#submitans').click(function () {
         var id = $('#submitans').attr('data-task-id');
@@ -103,7 +106,8 @@ $(document).ready(function() {
         });
     });
 
-    var x = 1;
+    var inputNum = document.getElementById('count');
+    var x = inputNum.getElementsByTagName('input').length;
     $('#plus').click(function (e) {
         e.preventDefault();
         if (x < 5) {

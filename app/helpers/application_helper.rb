@@ -14,4 +14,14 @@ module ApplicationHelper
     Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
 
+  module ApplicationHelper
+
+    def paginate objects, options = {}
+      options.reverse_merge!( theme: 'twitter-bootstrap' )
+
+      super( objects, options )
+    end
+
+  end
+
 end
