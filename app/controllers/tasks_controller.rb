@@ -7,16 +7,15 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.order(created_at: :desc)
     if params[:tag]
-      @tasks = Task.tagged_with(params[:tag])
+      @tasks = Task.tagged_with(params[:tag]).order(created_at: :desc).page(params[:page]).per(5)
     else
-      @tasks = Task.all
+      @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(5)
     end
   end
 
   def user_task
-    @tasks = Task.where({author_id: current_user.id})
+    @tasks = Task.where({author_id: current_user.id}).order(created_at: :desc).page(params[:page]).per(5)
 
   end
 
@@ -40,26 +39,24 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
-
-    if @task.update(task_params)
+    if task_params[:answers] == nil
+      flash[:danger] = "Task wasn't updated!"
+      render 'edit'
+    elsif @task.answers.count > task_params[:answers].count or true
+      @task.answers = ""
+      @task.update(task_params)
       flash[:success] = "Task was updated!"
       redirect_to @task
-    else
-      render 'edit'
     end
   end
 
   def destroy
-    @task = Task.find(params[:id])
-
     @task.destroy
     flash[:success] = "Task was destroyed!"
     redirect_to tasks_path
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def show

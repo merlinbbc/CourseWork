@@ -37,6 +37,9 @@ GEM
     best_in_place (3.0.3)
       actionpack (>= 3.2)
       railties (>= 3.2)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap-sass (3.3.5)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
@@ -92,6 +95,9 @@ GEM
       railties (>= 3.2.16)
     json (1.8.3)
     jwt (1.5.1)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (2.7.0)
@@ -213,7 +219,11 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on (~> 3.4)
   autoprefixer-rails
+
   best_in_place (~> 3.0.1)
+
+  bootstrap-kaminari-views
+
   bootstrap-sass (~> 3.3.1)
   coffee-rails (~> 4.0.0)
   devise
@@ -223,7 +233,11 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+
   jquery-ui-rails
+
+  kaminari
+
   less-rails
   mini_magick
   mysql2 (= 0.3.19)

@@ -42,11 +42,14 @@ gem 'twitter-bootstrap-rails'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'acts-as-taggable-on', '~> 3.4'
+
 gem 'best_in_place', '~> 3.0.1'
 gem 'jquery-ui-rails'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'mini_magick'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

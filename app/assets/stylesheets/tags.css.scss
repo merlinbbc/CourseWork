@@ -1,3 +1,17 @@
 // Place all the styles related to the tags controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#tag_cloud {
+  margin-top: 30%;
+  margin-left: 25%;
+  margin-right: 20%;
+  width:240px;
+  height:240px;
+  border-radius:40%;
+  color:#fff;
+  text-align:center;
+  .s { font-size: 0.8em; }
+  .m { font-size: 1.2em; }
+  .l { font-size: 1.6em; }
+
+}
