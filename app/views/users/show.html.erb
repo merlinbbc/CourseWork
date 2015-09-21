@@ -6,11 +6,13 @@
     <h3>
       Email: <%= @user.email %><br>
       <% if current_user.id == @user.id %>
-      Nickname: <%= best_in_place @user, :nickname, :as => :input, :nil => "Click me to add nickname" %><br>
+          <%= t('user_page.nickname') %>
+          <%= best_in_place @user, :nickname, :as => :input, :nil => t('user_page.change_nick') %><br>
       <% else %>
-          Nickname: <%= @user.nickname %><br>
+          <%= t('user_page.nickname') %>
+          <%= @user.nickname %><br>
       <% end %>
-      Rating: <%= @user.rating %><br>
+      <%= t('user_page.user_rating') %><%= @user.rating %><br>
     </h3>
 
   </div>
@@ -28,14 +30,14 @@
   <div class="col-md-1"></div>
   <div class="col-md-2 center">
     <% if (b=get_achiv_boss) != 0 %>
-        First in Top10:  X <%= b %><br>
+        <%= t('user_page.first_in_top') %><%= b %><br>
         <%= image_tag("boss.jpg", height: '241', width: '194') %>
     <% end %>
   </div>
 
   <div class="col-md-2 center">
     <% if (b=get_discoverer) != 0 %>
-        First decide <%= b %> tasks<br>
+        <%= t('user_page.first_decide') %> <%= b %> <%= t('user_page.tasks') %><br>
         <%= image_tag("taskman.jpg", height: '173', width: '95') %>
     <% end %>
   </div>
@@ -60,10 +62,18 @@
         <%= get_achievement_name id %><br>
         <%= image_tag(set_name(id.to_i-1), height: '185', width: '95') %>
     <% end %>
-    <button id="generate_image" data-id="<%= current_user.id %>">Generate image</button>
   </div>
 </div>
 <div class="row">
   <div class="col-md-1"></div>
-  <div class="col-md-10"><div id="image">  </div></div>
+  <div class="col-md-1">
+    <br><button class="btn btn-primary" id="generate_image" data-id="<%= current_user.id %>"><%= t('buttons.generate_img') %></button>
+  </div>
+</div>
+<div class="row"></div>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div id="image">  </div>
+  </div>
 </div>

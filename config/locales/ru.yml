@@ -5,25 +5,73 @@ ru:
     last: "Последняя"
     previous: "Предыдущая"
     truncate: "Trunc"
-  task_List:
-    paragraph: "Список задач"
-    section: "Раздел:"
-    author: "Автор:"
-    rating: "Сложность:"
-    mark: "Оценка:"
-    condition: "Условие:"
-    pls_set_mark: "Оцените пожалуйста)"
-    edit_btn: "Изменить"
-    destroy_btn: "Удалить"
+
   layout:
     home_page: "Главная"
     search_for: "Введите запрос..."
     search_btn: "Искать"
     all_tasks: "Все задачи"
     settings: "Настройки"
-    my_page: "Ваша страница"
+    my_page: "Моя страница"
     new_task: "Новая задача"
-    my_tasks: "Ваши задачи"
+    my_tasks: "Мои задачи"
     log_out: "Выйти"
     sign_in: "Войти"
     sign_up: "Зарегистрироваться"
+
+  search:
+    task_search: "Поиск задач"
+
+  task:
+    section: "Раздел:"
+    author: "Автор:"
+    rating: "Сложность:"
+    mark: "Оценка:"
+    condition: "Условие:"
+    text: "Текст:"
+    title: "Название:"
+    answers: "Ответы:"
+    tags: "Тэги:"
+    solved: "Решённых:"
+    unsolved: "Нерешённых:"
+
+  buttons:
+    edit: "Изменить"
+    destroy: "Удалить"
+    save: "Сохранить"
+    back: "Назад"
+    add_comment: "Добавить комментарий"
+    generate_img: "Сгенерировать картинку"
+
+  task_List:
+    paragraph: "Список задач"
+    pls_set_mark: "Оцените пожалуйста)"
+    confirm_destr: "Вы уверены?"
+
+  edit_new_task:
+    paragraph_e: "Изменить задачу"
+    paragraph_n: "Новая задача"
+    error: "prohibited this task from being saved:"
+
+  show:
+    check: "Проверить"
+    comments: "Комментарии"
+    add_comment: "Добавьте комментарий:"
+    confirm_destr: "Вы уверены?"
+
+  my_tasks:
+    paragraph: "Мои задачи"
+
+  home_page:
+    top_tasks: "Топ 10 задач"
+    top_users: "Топ 10 пользователей"
+    nickname: "Имя пользователя"
+    user_rating: "Рейтинг пользователя"
+
+  user_page:
+    nickname: "Имя пользователя"
+    user_rating: "Рейтинг пользователя"
+    change_nick: "Нажми, чтобы изменить имя"
+    first_in_top: "Первый в десятке: X"
+    first_decide: "Решил первый"
+    tasks: "задач"
