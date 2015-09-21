@@ -4,6 +4,7 @@
   <title>CourseWork</title>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', 'token-input', media: 'all', 'data-turbolinks-track' => true %>
   <% if current_user.present? %>
       <% if current_user.theme == 0 %>
           <%= stylesheet_link_tag 'theme1', media: 'screen' %>
@@ -14,7 +15,7 @@
       <%= stylesheet_link_tag 'theme1', media: 'screen' %>
   <% end %>
 
-  <%= stylesheet_link_tag    'application', 'token-input', media: 'all', 'data-turbolinks-track' => true %>
+
   <%= javascript_include_tag 'application', 'jquery.tokeninput', 'data-turbolinks-track' => true %>
 
   <%= csrf_meta_tags %>
