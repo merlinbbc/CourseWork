@@ -18,13 +18,14 @@ class User < ActiveRecord::Base
   end
 
 
-  def self.from_omniauth(auth)
-    where(email: auth['info']['email']).first_or_create do |user|
-      passwd = Devise.friendly_token.first(8)
-      user.password = passwd
-      user.password_confirmation = passwd
-      user.email = auth['info']['email']
-
+  def self.find_for_social_oauth(auth)
+    User.find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
+      user.confirmed_at = Time.now
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.email = "#{auth.uid}@#{auth.provider}.com"
+      user.password = "password"
+      user.nickname = "#{auth.provider}:#{auth.uid}"
     end
   end
 

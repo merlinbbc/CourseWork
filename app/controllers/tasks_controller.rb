@@ -2,6 +2,17 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_task, only: [:show,:update,:edit,:destroy,:decision]
 
+
+
+  def get_tags
+
+    tags = Array.new()
+    Tag.all.each do |t|
+      tags[t.id-1]= t.name
+    end
+    render json: { flag: "ok", tagss: tags }
+  end
+
   def tag_cloud
     @tasks = Task.tag_counts_on(:tags)
   end
@@ -22,6 +33,7 @@ class TasksController < ApplicationController
   def new
     @task = Task.new(answers: Array.new())
     @task.section
+    @all_tags = Tag.all
   end
 
   def create

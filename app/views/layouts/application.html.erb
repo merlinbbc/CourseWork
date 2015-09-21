@@ -13,7 +13,10 @@
   <% else %>
       <%= stylesheet_link_tag 'theme1', media: 'screen' %>
   <% end %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= stylesheet_link_tag    'application', 'token-input', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'jquery.tokeninput', 'data-turbolinks-track' => true %>
+
   <%= csrf_meta_tags %>
 
     <nav class="navbar navbar-default">
@@ -26,31 +29,30 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Foobar Development</a>
+            <%= link_to t('layout.home_page'), root_path, :class => "navbar-brand" %>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav pull-left">
-                <li><%= link_to 'Home page', root_path %></li>
-              </ul>
               <ul class="nav navbar-nav pull-right">
                 <% if user_signed_in? %>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %> <b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                        <li><%= link_to 'My page', user_path(current_user.id) %></li>
+                        <li><%= link_to t('layout.my_page'), user_path(current_user.id) %></li>
                         <li class="divider"></li>
-                        <li><%= link_to 'New task', new_task_path %></li>
-                        <li><%= link_to 'My tasks', mytask_path %></li>
+                        <li><%= link_to t('layout.new_task'), new_task_path %></li>
+                        <li><%= link_to t('layout.my_tasks'), mytask_path %></li>
                         <li class="divider"></li>
-                        <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
+                        <li><%= link_to t('layout.log_out'), destroy_user_session_path, :method => :delete %></li>
                       </ul>
                     </li>
-                    <li><%= link_to 'All Tasks', tasks_path %></li>
+
+                    <li><%= link_to t('layout.all_tasks'), tasks_path %></li>
+                    <li><%= link_to t('layout.settings') %></li>
 
                 <% else %>
-                    <li><%= link_to 'Sign In', new_user_session_path %></li>
-                    <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+                    <li><%= link_to t('layout.sign_in'), new_user_session_path %></li>
+                    <li><%= link_to t('layout.sign_up'), new_user_registration_path %></li>
                 <% end %>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toglge="dropdown">Settings<b class="caret"></b></a>
@@ -62,14 +64,14 @@
 
                 </li>
               </ul>
-          <div style = "margin-left: 55%; margin-top: 0.5%; margin-right: 2%">
+          <div style = "margin-top: 7px;">
             <%= form_for search_path, method: :get do |f|%>
                 <form class="navbar-form navbar-right" role="search">
-                  <div class="input-group">
+                  <div class="input-group ">
                     <span class="input-group-btn">
-                        <%= submit_tag "Go", name: nil, :class => "btn btn-default", :id => "searchGo"%>
+                        <%= submit_tag t('layout.search_btn'), name: nil, :class => "btn btn-default", :id => "searchGo"%>
                     </span>
-                    <%= text_field_tag :q, params[:q], :class => "form-control", :id => "searchField" , :placeholder => "Search for..." %>
+                    <%= text_field_tag :q, params[:q], :class => "form-control ", :id => "searchField" , :placeholder => t('layout.search_for'), :style => "width: 170px;" %>
                   </div>
                 </form>
             <% end %>

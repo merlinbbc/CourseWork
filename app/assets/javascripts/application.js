@@ -24,11 +24,58 @@
 //= require best_in_place.jquery-ui
 
 
-
-
-
 $(document).ready(function() {
+/*
 
+    var tags = [];
+    var i=0;
+    $.ajax({
+        type: 'GET',
+        url: "get_tags",
+        success: function (data) {
+            if( flag == "ok" ){
+                var tags = [];
+                var i=0;
+                for(var k in tagss){
+                    tags[i] = k;
+                    i++;
+                }
+                alert(tags);
+            }
+
+        },
+        error: function (data) {
+        }
+    });
+
+    for(tag in tags) {
+        tags[i]= '<%= tag %>';
+        i++;
+        }
+    var substringMatcher = function(strs) {
+            return function findMatches(q, cb) {
+                var matches, substringRegex;
+                matches = [];
+                substrRegex = new RegExp(q, 'i');
+                $.each(strs, function(i, str) {
+                    if (substrRegex.test(str)) {
+                        matches.push(str);
+                    }
+                });
+
+                cb(matches);
+            };
+    };
+    $('#tags').tagsinput({
+        typeaheadjs: {
+            afterSelect: function(val) { this.$element.val(""); },
+            name: 'existTags',
+            source: substringMatcher(tags)
+        }
+    });
+
+
+*/
     $('#searchGo').click(function(event){
             var qField = document.getElementById("searchField").value;
             event.preventDefault();

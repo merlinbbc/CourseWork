@@ -1,5 +1,5 @@
 <div class="center">
-<h1 style="margin-bottom: 0%; ">Task Listing</h1>
+<h1 style="margin-bottom: 0%; "><%= t 'task_List.paragraph' %></h1>
 </div>
 <div class="row">
   <div class="col-md-6">
@@ -17,11 +17,14 @@
           <div class="col-md-2"></div>
           <div class="col-md-3">
             <div class="pull-right">
-              <h4>Section: </h4>
+              <h4><%= t 'task.section' %></h4>
             </div>
           </div>
-          <div class="col-md-3 center">
-            <h4><%= task.section.name %></h4>
+          <div class="col-md-3 ">
+            <div class="center">
+              <h4><%= task.section.name %></h4>
+            </div>
+
           </div>
           <div class="col-md-4"></div>
         </div>
@@ -30,7 +33,7 @@
           <div class="col-md-2"></div>
           <div class="col-md-3">
             <div class="pull-right">
-              <h4>Author: </h4>
+              <h4><%= t 'task.author' %></h4>
             </div>
           </div>
           <div class="col-md-3 center">
@@ -43,7 +46,7 @@
           <div class="col-md-2"></div>
           <div class="col-md-3">
             <div class="pull-right">
-              <h4>Rating: </h4>
+              <h4><%= t 'task.rating' %></h4>
             </div>
           </div>
           <div class="col-md-3 center">
@@ -56,14 +59,15 @@
           <div class="col-md-2"></div>
           <div class="col-md-3 ">
             <div class="pull-right">
-              <h4>Mark: </h4>
+              <h4><%= t 'task_List.mark' %></h4>
             </div>
           </div>
           <div class="col-md-3 center">
             <% if check_on_set_task(task) %>
                 <h4><%= task.mark %></h4>
             <% else %>
-                <h4><font color="red"><i>Please, set mark)</i></font></h4>
+
+                <h4><i><%= t 'task_List.pls_set_mark' %></i></h4>
             <% end %>
           </div>
           <div class="col-md-4"></div>
@@ -80,8 +84,8 @@
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-10">
-            <h4>Condition:</h4>
-            <div style = "outline: 2px solid #eeeeee; margin-top: 5%; width: 100%;">
+            <h4><%= t 'task.condition' %></h4>
+            <div style = "outline: 2px solid #eeeeee; margin-top: 5%; width: 100%;">ntyf
               <%= markdown(task.text)%>
             </div>
           </div>
@@ -92,14 +96,14 @@
           <div class="col-md-3"></div>
           <div class="col-md-6">
             <div class="center">
-              <%= link_to 'Edit', edit_task_path(task), :class => "btn btn-primary" %>
+              <%= link_to t('buttons.edit'), edit_task_path(task), :class => "btn btn-primary" %>
             </div>
           </div>
           <div class="col-md-2" style="margin-bottom: 5%;">
             <div class="pull-right">
-                <%= link_to 'Destroy', task_path(task),
+                <%= link_to t('buttons.destroy'), task_path(task),
                             method: :delete,
-                            data: { confirm: 'Are you sure?' }, :class => "btn btn-primary" %>
+                            data: { confirm: t('task_List.confirm_destr') }, :class => "btn btn-primary" %>
             </div>
           </div>
           <div class="col-md-1"></div>

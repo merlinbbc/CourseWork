@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
 
 
   get 'tags/:tag', to: 'tasks#index', as: :tag
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :tasks do
     member do
       post :decision, :marks
+      get :get_tags
     end
   end
   resources :users do
@@ -18,11 +19,11 @@ Rails.application.routes.draw do
     end
   end
   resources :comments
+
   post "markdown/preview"
   post 'comments/create', to: 'comments#create'
   root "users#index"
 
   get 'mytask', to: 'tasks#user_task'
   get 'search', to: 'search#search'
-
 end

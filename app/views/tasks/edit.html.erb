@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4"></div>
-  <div class="col-md-4"><h2>Edit Task</h2></div>
+  <div class="col-md-4"><h2><%= t('edit_new_task.paragraph_e') %></h2></div>
   <div class="col-md-4"></div>
 </div>
 
@@ -8,8 +8,7 @@
     <% if @task.errors.any? %>
         <div id="error_explanation">
           <h2>
-            <%= pluralize(@task.errors.count, "error") %> prohibited
-            this task from being saved:
+            <%= pluralize(@task.errors.count, "error") %><%= t('edit_new_task.error') %>
           </h2>
           <ul>
             <% @task.errors.full_messages.each do |msg| %>
@@ -25,7 +24,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="pull-right ">
-              Title:
+              <%= t('task.title') %>
             </div><br><br>
           </div>
           <div class="col-md-9">
@@ -35,7 +34,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="pull-right">
-              Section:
+              <%= t('task.section') %>
             </div><br><br>
           </div>
           <div class="col-md-9">
@@ -45,7 +44,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="pull-right">
-              Rating:
+              <%= t('task.rating') %>
             </div>
           </div>
           <div class="col-md-9">
@@ -55,7 +54,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="pull-right">
-              Answers:
+              <%= t('task.answers') %>
             </div>
           </div>
           <div class="col-md-9">
@@ -88,11 +87,11 @@
 
       <div class="col-md-7">
         <div class="pull-left">
-          Text:
+          <%= t('task.text') %>
         </div><br>
         <%= f.text_area :text, 'data-provide'=>'markdown', :rows=>'12' %><br><br>
-        <%= f.submit "Save task", class: "btn btn-primary pull-left" , :style => "margin-right: 1%;"%>
-        <%= link_to 'Back', task_path, class: "btn btn-primary pull-left"%>
+        <%= f.submit t('buttons.save'), class: "btn btn-primary pull-left" , :style => "margin-right: 1%;"%>
+        <%= link_to t('buttons.back'), task_path, class: "btn btn-primary pull-left"%>
       </div>
       <div class="col-md-1"></div>
     </div>
