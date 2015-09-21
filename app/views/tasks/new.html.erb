@@ -1,15 +1,14 @@
 
 <div class="row" style="margin-bottom: 4%;">
   <div class="col-md-4"></div>
-  <div class="col-md-4"><h2>New Task</h2></div>
+  <div class="col-md-4"><h2><%= t('edit_new_task.paragraph_n') %></h2></div>
   <div class="col-md-4"></div>
 </div>
   <%= form_for :task, url: tasks_path do |f| %>
       <% if @task.errors.any? %>
             <div id="error_explanation">
               <h2>
-                <%= pluralize(@task.errors.count, "error") %> prohibited
-                this task from being saved:
+                <%= pluralize(@task.errors.count, "error") %><%= t('edit_new_task.error') %>
               </h2>
               <ul>
                 <% @task.errors.full_messages.each do |msg| %>
@@ -24,7 +23,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="pull-right" style="margin-top: 2%; margin-bottom: 4%" >
-          Title:
+          <%= t('task.title') %>
         </div>
       </div>
       <div class="col-md-9">
@@ -34,7 +33,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="pull-right" style="margin-top: 4%; margin-bottom: 4%" >
-          Section:
+          <%= t('task.section') %>
         </div>
       </div>
       <div class="col-md-9">
@@ -44,7 +43,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="pull-right" style="margin-top: 2%; margin-bottom: 4%" >
-          Rating:
+          <%= t('task.rating') %>
         </div>
       </div>
       <div class="col-md-9">
@@ -54,7 +53,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="pull-right" style="margin-top: 2%; margin-bottom: 4%" >
-          Tags:
+          <%= t('task.tags') %>
         </div>
       </div>
       <div class="col-md-9">
@@ -64,7 +63,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="pull-right">
-          Answers:
+          <%= t('task.answers') %>
         </div>
       </div>
       <div class="col-md-9">
@@ -93,10 +92,10 @@
 
   <div class="col-md-7">
     <div class="pull-left">
-      Text:
+      <%= t('task.text') %>
     </div><br>
     <%= f.text_area :text, 'data-provide'=>'markdown', :rows=>'12' %><br><br>
-    <%= f.submit "Save task", class: "btn btn-primary pull-left"  %>
+    <%= f.submit t('buttons.save'), class: "btn btn-primary pull-left"  %>
   </div>
   <div class="col-md-1"></div>
 </div>

@@ -20,11 +20,63 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  views:
-    pagination:
-      next: "Next"
-      first: "First"
-      last: "Last"
-      previous: "Prev"
-      truncate: "Trunc"
+  pagination:
+    next: "Next"
+    first: "First"
+    last: "Last"
+    previous: "Prev"
+    truncate: "Trunc"
+
+  layout:
+    home_page: "Home page"
+    search_for: "Search for..."
+    search_btn: "Go"
+    all_tasks: "All Tasks"
+    settings: "Settings"
+    my_page: "My Page"
+    new_task: "New task"
+    my_tasks: "My tasks"
+    log_out: "Log out"
+    sign_in: "Sign In"
+    sign_up: "Sign Up"
+
+  search:
+    task_search: "Tasks Search"
+
+  task:
+    section: "Section:"
+    author: "Author:"
+    rating: "Raing:"
+    mark: "Mark:"
+    condition: "Condition:"
+    text: "Text:"
+    title: "Title:"
+    answers: "Answers:"
+    tags: "Tags:"
+    solved: "Solved:"
+    unsolved: "Unsolved:"
+
+  buttons:
+    edit: "Edit"
+    destroy: "Destroy"
+    save: "Save task"
+    back: "Back"
+    add_comment: "Add comment"
+
+  task_List:
+    paragraph: "Task Listing"
+    pls_set_mark: "Please, set mark)"
+    confirm_destr: "Are you sure?"
+
+  edit_new_task:
+    paragraph_e: "Edit Task"
+    paragraph_n: "New Task"
+    error: "prohibited this task from being saved:"
+
+  show:
+    check: "Check"
+    comments: "Comments"
+    add_comment: "Add a comment:"
+
+  my_tasks:
+    paragraph: "My Tasks"

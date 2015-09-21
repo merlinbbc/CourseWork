@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     @user.update(user_params)
     respond_with @user
   end
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:nickname);
+    params.require(:user).permit(:nickname, :locale);
   end
 
 end
