@@ -38,7 +38,7 @@
         <% if u.nickname != "" %>
             <h3>Nickname:  <%= link_to u.nickname, user_path(u) %></h3>
         <% else %>
-            <h3>Email:  <%= u.email %></h3>
+            <h3>Email:  <%= link_to u.email, user_path(u) %></h3>
         <% end %>
         <h3>Rating user: <%= u.rating %></h3>
         <hr>

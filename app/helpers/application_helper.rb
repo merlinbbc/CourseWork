@@ -24,4 +24,14 @@ module ApplicationHelper
 
   end
 
+  def set_theme(i)
+    if current_user.present?
+      user = User.new
+      user = current_user
+      user.theme = i
+      user.save
+      #redirect_to root_path
+    end
+  end
+
 end

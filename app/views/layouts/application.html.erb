@@ -4,6 +4,15 @@
   <title>CourseWork</title>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <% if current_user.present? %>
+      <% if current_user.theme == 0 %>
+          <%= stylesheet_link_tag 'theme1', media: 'screen' %>
+      <% else %>
+          <%= stylesheet_link_tag 'theme2', media: 'screen' %>
+      <% end %>
+  <% else %>
+      <%= stylesheet_link_tag 'theme1', media: 'screen' %>
+  <% end %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
@@ -38,11 +47,20 @@
                       </ul>
                     </li>
                     <li><%= link_to 'All Tasks', tasks_path %></li>
-                    <li><%= link_to 'Settings', edit_user_path(current_user.id)  %></li>
+
                 <% else %>
                     <li><%= link_to 'Sign In', new_user_session_path %></li>
                     <li><%= link_to 'Sign Up', new_user_registration_path %></li>
                 <% end %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toglge="dropdown">Settings<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li>Dark Theme</li>
+                    <li class="divider"></li>
+                    <li>Light Theme</li>
+                  </ul>
+
+                </li>
               </ul>
           <div style = "margin-left: 55%; margin-top: 0.5%; margin-right: 2%">
             <%= form_for search_path, method: :get do |f|%>

@@ -32,4 +32,17 @@ module UsersHelper
     str = "inventor" + id.to_s + ".jpg"
     return str
   end
+
+  def check_dull_boring
+    AchievementsUsers.where({user_id: current_user.id, achievement_id: 12}).empty?
+  end
+
+
+
+
+
+
+
+
+
 end

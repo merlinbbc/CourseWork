@@ -2,20 +2,15 @@
   <div class="col-md-1"></div>
   <div class="col-md-2" style="margin-top: 5%;">
     <h4>
-      Solved: <font color="#228b22" ><%= Attempt.where({ task_id: @task.id, status: true }).count %></font><br>
-      Unsolved: <font color="red" ><%= Attempt.where({ task_id: @task.id, status: false }).count %></font><br>
+      Solved: <font color="#228b22" ><%= get_solved @task.id %></font><br>
+      Unsolved: <font color="red" ><%= get_unsolved @task.id %></font><br>
       Rating: <%= @task.rating %><br>
       Mark: <%= @task.mark %><br>
       Tags:
       <% @task.tag_list.each do |tag| %>
           <%= link_to tag %><br>
       <% end %>
-      Author:
-      <% if (nick = User.where({id: @task.author_id }).last.nickname) != "" %>
-          <%= nick %><br>
-      <% else %>
-          <%= User.where({id: @task.author_id}).last.email %><br>
-      <% end %>
+      Author: <%= get_author_email_or_nick(@task.author_id) %><br>
       Section: <%= @task.section.name %>
     </h4>
 
@@ -38,8 +33,7 @@
     <% end %>
 
     <% if current_user.id != @task.author_id %>
-        <% if Attempt.where({ task_id: @task.id, user_id: current_user.id }).empty? or
-                !(Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.status %>
+        <% if check_answer %>
 
                 <div id="answerfield"><input type="text" placeholder="Your answer" id = "answer"/>
                   <button id="submitans" data-task-id="<%= @task.id %>">
@@ -47,9 +41,7 @@
                   <font color="red"><span id='icon' class=" "></span></font>
                 </div>
 
-        <% elsif (Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.status and
-                current_user.id != @task.author_id and
-                !(Attempt.where({ task_id: @task.id, user_id: current_user.id })).last.set_mark %>
+        <% elsif check_mark %>
 
                 <div id="markfield"><input type="text" placeholder="Your mark" id = "markk"/>
                   <button id="submitanss" data-task-id="<%= @task.id %>" >Check </button>
@@ -73,7 +65,7 @@
           <div class="panel panel-primary">
             <div class="panel-heading">
               <strong>
-                <%= User.where({id: comment.user_id}).last.email %>
+                <%= get_author_email_or_nick comment.user_id %>
               </strong>
             </div>
             <div class="panel-body">

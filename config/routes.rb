@@ -12,7 +12,11 @@ Rails.application.routes.draw do
       post :decision, :marks
     end
   end
-  resources :users
+  resources :users do
+    member do
+      get :generate_achievements_image
+    end
+  end
   resources :comments
   post "markdown/preview"
   post 'comments/create', to: 'comments#create'

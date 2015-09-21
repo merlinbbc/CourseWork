@@ -33,7 +33,7 @@ class TasksController < ApplicationController
       render 'new'
     else
       flash[:success] = "Task was created!"
-      set_hemorrhoid
+      set_dull_boring
       redirect_to @task
     end
   end
@@ -51,6 +51,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    Attempt.where({task_id: @task.id}).each do |a|
+      a.destroy
+    end
     @task.destroy
     flash[:success] = "Task was destroyed!"
     redirect_to tasks_path
@@ -65,38 +68,30 @@ class TasksController < ApplicationController
   def decision
     if @task.answers.include?(params[:answer])
       if Attempt.where({ task_id: @task.id, user_id: current_user.id }).empty?
-        #new_attempt true
-        @attempt = Attempt.new
-        @attempt.task_id = @task.id
-        @attempt.user_id = current_user.id
-        @attempt.attempts_count += 1
-        @attempt.status = true
-        @attempt.save
+        attempt = Attempt.new({task_id: @task.id, user_id: current_user.id, attempts_count: 1, status: true })
+        attempt.save
       else
-        #update_attempt true
-        @attempt = Attempt.where({ task_id: @task.id, user_id: current_user.id }).first
-        @attempt.status = true
-        @attempt.attempts_count += 1
-        @attempt.save
+        attempt = Attempt.where({ task_id: @task.id, user_id: current_user.id }).first
+        attempt.status = true
+        attempt.attempts_count += 1
+        attempt.save
       end
-      @user = current_user
-      @user.rating += @task.rating.to_i * 10 - @attempt.attempts_count + 1
-      @user.save
+      user = current_user
+      user.rating += @task.rating.to_i * 10 - attempt.attempts_count + 1
+      user.save
       set_achievements
       render json: {flag: "correct"}
     else
       if Attempt.where({ task_id: @task.id, user_id: current_user.id }).empty?
-        #new_attemt false
-        @attempt = Attempt.new
-        @attempt.task_id = @task.id
-        @attempt.user_id = current_user.id
-        @attempt.attempts_count += 1
-        @attempt.save
+        attempt = Attempt.new
+        attempt.task_id = @task.id
+        attempt.user_id = current_user.id
+        attempt.attempts_count += 1
+        attempt.save
       else
-        #update_attempt false
-        @attempt = Attempt.where({ task_id: @task.id, user_id: current_user.id }).first
-        @attempt.attempts_count += 1
-        @attempt.save
+        attempt = Attempt.where({ task_id: @task.id, user_id: current_user.id }).first
+        attempt.attempts_count += 1
+        attempt.save
       end
       render json: {flag: "incorect"}
     end
@@ -127,38 +122,20 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title,:text, :rating, :section_id, :tag_list, answers: []);
   end
 
-  def new_attempt(st)
-    #binding.pry
-    @attempt = Attempt.new
-    @attempt.task_id = @task.id
-    @attempt.user_id = current_user.id
-    @attempt.attempts_count += 1
-    @attempt.status = true if st
-    @attempt.save
-  end
-
-  def update_attempt(st)
-    @attempt = Attempt.where({ task_id: @task.id, user_id: current_user.id }).first
-    @attempt.status = true if st
-    @attempt.attempts_count += 1
-    @attempt.save
-  end
-
   def set_boss_achievement
     if ( current_user.id == User.order(rating: :desc).first.id )
       AchievementsUsers.new({achievement_id: 1, user_id: current_user.id}).save
     end
   end
 
-
   def check_achievements(id)
     if AchievementsUsers.where({achievement_id: id, user_id: current_user.id}).empty?
       achievement_user = AchievementsUsers.new({achievement_id: id, user_id: current_user.id})
       achievement_user.save
     else
-      achievement_user = AchievementsUsers.where({achievement_id: id, user_id: current_user.id})
+      achievement_user = AchievementsUsers.where({achievement_id: id, user_id: current_user.id}).first
       if achievement_user.achievement_id != id
-        achievement_user.update(achievement_id: id, user_id: current_user.id)
+        achievement_user.update(achievement_id: id)
       end
     end
   end
@@ -191,13 +168,11 @@ class TasksController < ApplicationController
     end
   end
 
-
   def set_discover
     if( current_user.id == Attempt.where({status: true}).order(created_at: :desc).first.user_id )
       AchievementsUsers.new({achievement_id: 11, user_id: current_user.id}).save
     end
   end
-
 
   def set_achievements
     set_boss_achievement
@@ -206,10 +181,12 @@ class TasksController < ApplicationController
     set_discover
   end
 
-  def set_hemorrhoid
+  def set_dull_boring
     if Task.where({author_id: current_user.id}).count == 10
       AchievementsUsers.new({achievement_id: 12, user_id: current_user.id}).save
     end
   end
+
+
 
 end

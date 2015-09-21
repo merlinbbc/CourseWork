@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="col-md-3 center">
-            <h4><%= User.where({id: task.author_id} ).last.email %></h4>
+            <h4><%= get_author_email_or_nick(task.author_id) %></h4>
           </div>
           <div class="col-md-4"></div>
         </div>
@@ -60,10 +60,10 @@
             </div>
           </div>
           <div class="col-md-3 center">
-            <% if (Attempt.where({user_id: current_user.id, task_id: task.id})).empty? or (Attempt.where({user_id: current_user.id, task_id: task.id})).last.set_mark%>
+            <% if check_on_set_task(task) %>
                 <h4><%= task.mark %></h4>
             <% else %>
-                <h4><i>Please, set mark)</i></h4>
+                <h4><font color="red"><i>Please, set mark)</i></font></h4>
             <% end %>
           </div>
           <div class="col-md-4"></div>

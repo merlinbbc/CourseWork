@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    #@task = Task.find(params[:task_id])
     @comment = current_user.comments.create(comment_params)
     @comment.save
     id = @comment.id

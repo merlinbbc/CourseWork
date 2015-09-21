@@ -3,9 +3,13 @@
 
   <div class="col-md-5">
     <h3>
-      My email: <%= @user.email %><br>
-      My nickname: <%= best_in_place @user, :nickname, :as => :input, :nil => "Click me to add nickname" %><br>
-      My rating: <%= @user.rating %><br>
+      Email: <%= @user.email %><br>
+      <% if current_user.id == @user.id %>
+      Nickname: <%= best_in_place @user, :nickname, :as => :input, :nil => "Click me to add nickname" %><br>
+      <% else %>
+          Nickname: <%= @user.nickname %><br>
+      <% end %>
+      Rating: <%= @user.rating %><br>
     </h3>
 
   </div>
@@ -13,14 +17,25 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2 center">
-    First in Top10:  X <%= get_achiv_boss %><br>
-    <%= image_tag("boss.jpg", height: '241', width: '194') %>
+    <% if (b=get_achiv_boss) != 0 %>
+        First in Top10:  X <%= b %><br>
+        <%= image_tag("boss.jpg", height: '241', width: '194') %>
+    <% end %>
   </div>
 
   <div class="col-md-2 center">
-    Your first decide <%= get_discoverer %> tasks<br>
-    <%= image_tag("taskman.jpg", height: '173', width: '95') %>
+    <% if (b=get_discoverer) != 0 %>
+        First decide <%= b %> tasks<br>
+        <%= image_tag("taskman.jpg", height: '173', width: '95') %>
+    <% end %>
   </div>
+  <div class="col-md-2 center">
+    <% if !check_dull_boring %>
+        <%= get_achievement_name 12 %><br>
+        <%= image_tag("boss.jpg", height: '241', width: '194') %>
+    <% end %>
+  </div>
+
 </div>
 <div class="row">
   <div class="col-md-1"></div>
@@ -35,13 +50,10 @@
         <%= get_achievement_name id %><br>
         <%= image_tag(set_name(id.to_i-1), height: '185', width: '95') %>
     <% end %>
+    <button id="generate_image" data-id="<%= current_user.id %>">Generate image</button>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-2">
-
-
-  </div>
-
-
+  <div class="col-md-1"></div>
+  <div class="col-md-10"><div id="image">  </div></div>
 </div>

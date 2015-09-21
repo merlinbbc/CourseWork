@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917165007) do
+ActiveRecord::Schema.define(version: 20150920235209) do
 
   create_table "achievements", force: true do |t|
     t.string   "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150917165007) do
     t.datetime "updated_at"
   end
 
-  create_table "achievements_users", id: false, force: true do |t|
+  create_table "achievements_users", force: true do |t|
     t.integer  "user_id"
     t.integer  "achievement_id"
     t.datetime "created_at"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20150917165007) do
     t.string   "unconfirmed_email"
     t.string   "provider"
     t.integer  "rating",                 default: 0
+    t.integer  "theme",                  default: 0
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

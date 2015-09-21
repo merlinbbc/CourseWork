@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="col-md-3 center">
-            <h4><font color="#228b22" ><%= Attempt.where({ task_id: task.id, status: true }).count %></font></h4>
+            <h4><font color="#228b22" ><%= get_solved task.id %></font></h4>
           </div>
           <div class="col-md-4"></div>
         </div>
@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="col-md-3 center">
-            <h4><font color="red" ><%= Attempt.where({ task_id: task.id, status: false }).count %></font></h4>
+            <h4><font color="red" ><%= get_unsolved task.id %></font></h4>
           </div>
           <div class="col-md-4"></div>
         </div>

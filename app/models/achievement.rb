@@ -1,3 +1,4 @@
 class Achievement < ActiveRecord::Base
-  has_and_belongs_to_many :users
+  has_many :achievements_users
+  has_many :users, through: :achievements_users
 end

@@ -37,6 +37,23 @@ $(document).ready(function() {
         }
     );
 
+
+    $('#generate_image').click(function() {
+        var id = $('#generate_image').attr('data-id');
+        alert("Wait plese");
+        $.ajax({
+            type: 'GET', url: "/users/" + id + "/generate_achievements_image",
+            success: function(data){
+                if (data.flag == "good") {
+                    $('#image').append('<img alt="Boss" height="300" src="/assets/'+ data.email  +'.png" width="904">  ')
+                }
+            },
+            error: function(data){
+            }
+        });
+
+    });
+
     $('#add-comment').click(function() {
      var task_id = $('#add-comment').attr('data-task-id');
      var comment = $('#text-area').val();
@@ -106,7 +123,6 @@ $(document).ready(function() {
             },
             error: function (data) {
 
-//authFail();
             }
         });
     });
