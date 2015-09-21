@@ -2,8 +2,9 @@
   <div class="col-md-1"></div>
   <div class="col-md-2" style="margin-top: 5%;">
     <h4>
-      Solved: <font color="#228b22" ><%= get_solved @task.id %></font><br>
-      Unsolved: <font color="red" ><%= get_unsolved @task.id %></font><br>
+      <%= t('task.solved') %><font color="#228b22" ><%= Attempt.where({ task_id: @task.id, status: true }).count %></font><br>
+      <%= t('task.unsolved') %><font color="red" ><%= Attempt.where({ task_id: @task.id, status: false }).count %></font><br>
+
       Rating: <%= @task.rating %><br>
       Mark: <%= @task.mark %><br>
       Tags:
