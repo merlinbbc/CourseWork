@@ -11,9 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20150921035124) do
-
 
   create_table "achievements", force: true do |t|
     t.string   "name"
@@ -116,10 +114,8 @@ ActiveRecord::Schema.define(version: 20150921035124) do
     t.string   "unconfirmed_email"
     t.string   "provider"
     t.integer  "rating",                 default: 0
-
-    t.integer  "theme",                  default: 0
-
     t.string   "uid"
+    t.integer  "theme",                  default: 0
     t.string   "locale",                 default: "en"
   end
 

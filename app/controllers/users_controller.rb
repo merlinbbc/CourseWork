@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @users = User.limit(10).order(rating: :desc)
+    @users = User.limit(10).where("rating != '0'").order(rating: :desc)
     @tasks = Task.limit(10).order(mark: :desc)
   end
 
@@ -151,7 +151,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:nickname, :locale);
+    params.require(:user).permit(:nickname, :locale, :theme);
   end
 
 
