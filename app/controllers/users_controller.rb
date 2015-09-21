@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.limit(10).where("rating != '0'").order(rating: :desc)
-    @tasks = Task.limit(10).order(mark: :desc)
+    @tasks = Task.limit(10).where("mark != '0'").order(mark: :desc)
   end
 
   def show
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
       cc.compose "Over"
       cc.background "transparent"
       cc.pointsize "30"
-      cc.geometry "+110+5"
+      cc.geometry "+110+0"
       cc.label number_for_label 1
     end
   end
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
       cc.compose "Over"
       cc.background "transparent"
       cc.pointsize "17"
-      cc.geometry "+115+2"
+      cc.geometry "+115+0"
       cc.label number_for_label 11
     end
   end
@@ -97,7 +97,7 @@ class UsersController < ApplicationController
     label = MiniMagick::Image.new("achievement_images/2.png")
     label = label.composite(image) do |cc|
       cc.compose "Over"
-      cc.geometry "+120+85"
+      cc.geometry "+120+80"
     end
   end
 

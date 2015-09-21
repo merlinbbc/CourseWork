@@ -69,8 +69,8 @@ ru:
     user_rating: "Рейтинг пользователя"
 
   user_page:
-    nickname: "Имя пользователя"
-    user_rating: "Рейтинг пользователя"
+    nickname: "Имя пользователя: "
+    user_rating: "Рейтинг пользователя: "
     change_nick: "Нажми, чтобы изменить имя"
     first_in_top: "Первый в десятке: X"
     first_decide: "Решил первый"

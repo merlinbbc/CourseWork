@@ -69,8 +69,8 @@ en:
     user_rating: "User rating"
 
   user_page:
-    nickname: "Nickname"
-    user_rating: "User rating"
+    nickname: "Nickname: "
+    user_rating: "User rating: "
     change_nick: "Click me to add nickname"
     first_in_top: "First in Top10:  X"
     first_decide: "First decide"

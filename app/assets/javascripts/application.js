@@ -25,57 +25,7 @@
 
 
 $(document).ready(function() {
-/*
 
-    var tags = [];
-    var i=0;
-    $.ajax({
-        type: 'GET',
-        url: "get_tags",
-        success: function (data) {
-            if( flag == "ok" ){
-                var tags = [];
-                var i=0;
-                for(var k in tagss){
-                    tags[i] = k;
-                    i++;
-                }
-                alert(tags);
-            }
-
-        },
-        error: function (data) {
-        }
-    });
-
-    for(tag in tags) {
-        tags[i]= '<%= tag %>';
-        i++;
-        }
-    var substringMatcher = function(strs) {
-            return function findMatches(q, cb) {
-                var matches, substringRegex;
-                matches = [];
-                substrRegex = new RegExp(q, 'i');
-                $.each(strs, function(i, str) {
-                    if (substrRegex.test(str)) {
-                        matches.push(str);
-                    }
-                });
-
-                cb(matches);
-            };
-    };
-    $('#tags').tagsinput({
-        typeaheadjs: {
-            afterSelect: function(val) { this.$element.val(""); },
-            name: 'existTags',
-            source: substringMatcher(tags)
-        }
-    });
-
-
-*/
     $('#searchGo').click(function(event){
             var qField = document.getElementById("searchField").value;
             event.preventDefault();
@@ -87,7 +37,7 @@ $(document).ready(function() {
 
     $('#generate_image').click(function() {
         var id = $('#generate_image').attr('data-id');
-        alert("Wait plese");
+        alert("Wait please");
         $.ajax({
             type: 'GET', url: "/users/" + id + "/generate_achievements_image",
             success: function(data){
@@ -144,7 +94,7 @@ $(document).ready(function() {
                 if (data.flag == "correct") {
                     $('#icon').attr('class', 'glyphicon glyphicon-ok-circle');
                     $('#answerfield').remove();
-                    alert("Gooood motherfucker");
+                    alert("You're right");
                 }
                 else
                     $('#icon').attr('class', 'glyphicon glyphicon-remove-circle');
@@ -162,7 +112,7 @@ $(document).ready(function() {
             url: id + "/marks" + "?mark=" + mark,
             success: function (data) {
                 if (data.flag == "correct") {
-                    alert("good");
+                    alert("Thanks");
                     $('#markfield').remove();
                 }
                 else

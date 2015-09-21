@@ -8,9 +8,9 @@
           <%= t('task.unsolved') %><font color="red" ><%= Attempt.where({ task_id: t.id, status: false }).count %></font><br>
           <%= t('task.rating') %><%= t.rating %><br>
           <%= t('task.mark') %><%= t.mark %><br>
-          <%= t('task.section') %><%= t.section.name %><br>
+          <%= t('task.section') %><%= t.section.name %><br><br>
           <%= t('task.condition') %></h4>
-        <div style = "outline: 2px solid #000;">
+        <div style = "outline: 1px solid #666;">
           <%=markdown(t.text)%>
         </div>
         <br>

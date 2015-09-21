@@ -4,7 +4,7 @@
 
   <div class="col-md-5">
     <h3>
-      Email: <%= @user.email %><br>
+      E-mail: <%= @user.email %><br>
       <% if current_user.id == @user.id %>
           <%= t('user_page.nickname') %>
           <%= best_in_place @user, :nickname, :as => :input, :nil => t('user_page.change_nick') %><br>
@@ -12,16 +12,18 @@
           <%= t('user_page.nickname') %>
           <%= @user.nickname %><br>
       <% end %>
-      <%= t('user_page.user_rating') %><%= @user.rating %><br>
+      <%= t('user_page.user_rating') %> <%= @user.rating %><br>
     </h3>
 
   </div>
   <div class="col-md-1"></div>
   <div class="col-md-3">
+    <% if current_user.id == @user.id %>
     <%= simple_form_for(@user, html: { class: 'form-vertical' }) do |form| %>
         <%= form.input :locale, collection: ['ru','en'], prompt: false %>
         <%= form.input :theme, collection: ['0','1'], prompt: false %>
         <%= form.button :submit, class: 'btn btn-primary' %>
+    <% end %>
     <% end %>
   </div>
   <div class="col-md-2"></div>
@@ -31,20 +33,20 @@
   <div class="col-md-2 center">
     <% if (b=get_achiv_boss) != 0 %>
         <%= t('user_page.first_in_top') %><%= b %><br>
-        <%= image_tag("boss.jpg", height: '241', width: '194') %>
+        <%= image_tag("2.png", height: '200', width: '200') %>
     <% end %>
   </div>
 
   <div class="col-md-2 center">
     <% if (b=get_discoverer) != 0 %>
         <%= t('user_page.first_decide') %> <%= b %> <%= t('user_page.tasks') %><br>
-        <%= image_tag("taskman.jpg", height: '173', width: '95') %>
+        <%= image_tag("2.png", height: '200', width: '200') %>
     <% end %>
   </div>
   <div class="col-md-2 center">
     <% if !check_dull_boring %>
         <%= get_achievement_name 12 %><br>
-        <%= image_tag("boss.jpg", height: '241', width: '194') %>
+        <%= image_tag("2.png", height: '200', width: '200') %>
     <% end %>
   </div>
 
@@ -54,20 +56,22 @@
   <div class="col-md-2 center">
     <% if (id=get_inventor_type) != 0 %>
         <%= get_achievement_name id %><br>
-        <%= image_tag(set_name(id.to_i-5), height: '185', width: '95') %>
+        <%= image_tag("2.png", height: '200', width: '200') %>
     <% end %>
   </div>
   <div class="col-md-2 center">
     <% if (id=get_inventor_level) != 0 %>
         <%= get_achievement_name id %><br>
-        <%= image_tag(set_name(id.to_i-1), height: '185', width: '95') %>
+        <%= image_tag("2.png", height: '200', width: '200') %>
     <% end %>
   </div>
 </div>
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-1">
+    <% if current_user.id == @user.id %>
     <br><button class="btn btn-primary" id="generate_image" data-id="<%= current_user.id %>"><%= t('buttons.generate_img') %></button>
+    <%end%>
   </div>
 </div>
 <div class="row"></div>
