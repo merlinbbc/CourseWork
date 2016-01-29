@@ -23,8 +23,8 @@ Rails.application.configure do
       :port => 587,
       :domain => "mail.google.com",
       :authentication => :login,
-      :user_name => "laviokxdd008@gmail.com",
-      :password => "123789456lava"
+      :user_name => "your e-mail",
+      :password => "your password"
   }
 
 
